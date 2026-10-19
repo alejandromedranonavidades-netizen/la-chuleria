@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://lachuleria.es">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/estilos.css">
   <!-- Intro con el logo: solo la primera vez que se entra en la sesión -->
   <script>(function(){try{if(sessionStorage.getItem("intro-vista")||matchMedia("(prefers-reduced-motion: reduce)").matches)return;document.documentElement.classList.add("intro-pendiente");window.__temporizadorIntro=setTimeout(function(){document.documentElement.classList.remove("intro-pendiente");},2500);}catch(e){}})();</script>
@@ -181,7 +181,7 @@
               <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-830x1024.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-768x948.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-830x1024.jpg 830w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-1244x1536.jpg 1244w" sizes="(max-width: 860px) 80vw, 36vw" width="830" height="1024" alt="Mesa con flores frescas junto a las banquetas rojas de la sala" loading="lazy" decoding="async" data-parallax>
             </div>
           </figure>
-          <figure class="marco marco--circulo marco--mostaza nosotros__pequena">
+          <figure class="marco marco--circulo marco--negro nosotros__pequena">
             <div class="foto">
               <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-1024x783.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-768x587.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-1024x783.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-1536x1174.jpg 1536w" sizes="(max-width: 860px) 45vw, 18vw" width="1024" height="783" alt="La barra con los grifos de cerveza y las copas colgadas" loading="lazy" decoding="async">
             </div>
@@ -209,45 +209,44 @@
       </div>
     </section>
 
-    <!-- ===================== DENTRO, FUERA O EN LA BARRA ===================== -->
-    <section class="seccion seccion--oscura sitios" id="sitios" aria-labelledby="sitios-titulo">
+    <!-- ===================== EL LOCAL ===================== -->
+    <section class="seccion local" id="local" aria-labelledby="local-titulo">
       <div class="contenedor">
         <div class="cabeza-seccion revelar">
-          <h2 class="titulo-seccion" id="sitios-titulo">Dentro, fuera <em>o en la barra</em></h2>
-          <p class="cabeza-seccion__texto">Tres sitios para quedarte, según el plan que traigas.</p>
-        </div>
-
-        <div class="sitios__rejilla">
-          <!-- Foto fija que cambia según el sitio que estés leyendo -->
-          <div class="sitios__visual" aria-hidden="true">
-            <figure class="marco marco--mostaza">
-              <div class="foto activa"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1536x1022.jpg 1536w" sizes="(max-width: 1024px) 90vw, 44vw" width="1024" height="681" alt="" loading="lazy" decoding="async"></div>
-              <div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1536x1022.jpg 1536w" sizes="(max-width: 1024px) 90vw, 44vw" width="1024" height="681" alt="" loading="lazy" decoding="async"></div>
-              <div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1536x1022.jpg 1536w" sizes="(max-width: 1024px) 90vw, 44vw" width="1024" height="681" alt="" loading="lazy" decoding="async"></div>
-            </figure>
+          <div>
+            <p class="antetitulo">El local</p>
+            <h2 class="titulo-seccion" id="local-titulo">Se come bien <em>y se está mejor</em></h2>
           </div>
-
-          <ol class="sitios__pasos">
-            <li class="sitios__paso activo">
-              <p class="sitios__marca">La sala</p>
-              <h3 class="sitios__titulo">Para comer sin prisa</h3>
-              <p>Banquetas rojas, ladrillo visto y mesas de madera. Un sitio cálido para la comida del domingo o una cena con amigos.</p>
-              <figure class="marco marco--mostaza sitios__foto-movil"><div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1536x1022.jpg 1536w" sizes="90vw" width="1024" height="681" alt="La sala con banquetas rojas y ventanales" loading="lazy" decoding="async"></div></figure>
-            </li>
-            <li class="sitios__paso">
-              <p class="sitios__marca">La barra</p>
-              <h3 class="sitios__titulo">Para picar algo y brindar</h3>
-              <p>Cervezas nacionales y del mundo, vinos de Ribera, Rioja, Rueda o Rías Baixas y algo rico para acompañar.</p>
-              <figure class="marco marco--mostaza sitios__foto-movil"><div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1536x1022.jpg 1536w" sizes="90vw" width="1024" height="681" alt="Copas colgadas sobre la barra" loading="lazy" decoding="async"></div></figure>
-            </li>
-            <li class="sitios__paso">
-              <p class="sitios__marca">La terraza</p>
-              <h3 class="sitios__titulo">Para las tardes largas</h3>
-              <p>Mesas al aire libre para comer, cenar o alargar la sobremesa cuando hace bueno.</p>
-              <figure class="marco marco--mostaza sitios__foto-movil"><div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1536x1022.jpg 1536w" sizes="90vw" width="1024" height="681" alt="Salida a la terraza desde el comedor" loading="lazy" decoding="async"></div></figure>
-            </li>
-          </ol>
+          <p class="cabeza-seccion__texto">Ladrillo, madera y terciopelo: tres ambientes bajo el mismo techo, y terraza para cuando hace bueno.</p>
         </div>
+
+        <!-- El panel que señalas se abre; en el móvil van uno debajo de otro -->
+        <ul class="local__paneles">
+          <li class="panel activo">
+            <div class="panel__foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1536x1022.jpg 1536w" sizes="(max-width: 860px) 92vw, 52vw" width="1024" height="681" alt="La sala con banquetas rojas, ladrillo visto y ventanales" loading="lazy" decoding="async"></div>
+            <div class="panel__texto">
+              <span class="panel__numero">01</span>
+              <h3 class="panel__nombre">La sala</h3>
+              <div class="panel__mas"><p class="panel__desc">Banquetas rojas, ladrillo visto y grandes ventanales que llenan la sala de luz.</p></div>
+            </div>
+          </li>
+          <li class="panel">
+            <div class="panel__foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-1536x1022.jpg 1536w" sizes="(max-width: 860px) 92vw, 52vw" width="1024" height="681" alt="Comedor con papel pintado, un gran espejo y sillas de terciopelo" loading="lazy" decoding="async"></div>
+            <div class="panel__texto">
+              <span class="panel__numero">02</span>
+              <h3 class="panel__nombre">El comedor</h3>
+              <div class="panel__mas"><p class="panel__desc">Papel pintado, un gran espejo y sillas de terciopelo, para comidas y cenas con calma.</p></div>
+            </div>
+          </li>
+          <li class="panel">
+            <div class="panel__foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1536x1022.jpg 1536w" sizes="(max-width: 860px) 92vw, 52vw" width="1024" height="681" alt="Copas colgadas sobre la barra y grifos de cerveza" loading="lazy" decoding="async"></div>
+            <div class="panel__texto">
+              <span class="panel__numero">03</span>
+              <h3 class="panel__nombre">La barra</h3>
+              <div class="panel__mas"><p class="panel__desc">Copas colgadas, cerveza de grifo y vinos de Ribera, Rioja, Rueda o Rías Baixas.</p></div>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 

@@ -20,7 +20,7 @@
    4.  Títulos que salen de un desenfoque, palabra a palabra
    5.  Texto de la historia que se enciende palabra a palabra al bajar
    6.  Fotos que se descubren con su azulejo de color; fotos redondas que caen girando
-   7.  "Dentro, fuera o en la barra": línea que avanza con los sitios
+   7.  El local: los tres paneles se descubren de abajo arriba
    8.  Los imprescindibles: carrusel que se desliza o se arrastra en horizontal
    9.  Carta: pestaña que se desliza y platos en cascada
    10. Eventos y a domicilio, llamada a reservar (ventana que se abre) y horario
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animarCollage();
   animarParallax();
   animarCifras();
-  animarSitios();
+  animarLocal();
   animarDestacados();
   animarPestanas();
   animarPlanes();
@@ -255,7 +255,7 @@ function animarCabezaInterior() {
 /* ---------- 4. Títulos: palabra a palabra, saliendo de un desenfoque (BlurText) ---------- */
 function animarTitulos() {
   if (!window.SplitText) return;
-  document.querySelectorAll(".titulo-seccion, .llamada__titulo, .carta-categoria__titulo, .sitios__titulo, .plan__titulo").forEach((titulo) => {
+  document.querySelectorAll(".titulo-seccion, .llamada__titulo, .carta-categoria__titulo, .plan__titulo").forEach((titulo) => {
     const partido = SplitText.create(titulo, { type: "words" });
     gsap.from(partido.words, {
       autoAlpha: 0,
@@ -319,8 +319,8 @@ function animarEntradilla() {
 /* ---------- 6. Fotos con marco: se descubren y el azulejo de color se coloca detrás ---------- */
 function animarFotos() {
   gsap.utils.toArray(".marco").forEach((marco) => {
-    // Esas tienen su propia animación (la foto fija de los sitios y las fotos redondas)
-    if (marco.closest(".sitios__visual") || marco.classList.contains("marco--circulo")) return;
+    // Las fotos redondas tienen su propia animación
+    if (marco.classList.contains("marco--circulo")) return;
     const foto = marco.querySelector(".foto");
     if (!foto) return;
     const img = foto.querySelector("img");
@@ -420,32 +420,21 @@ function contarHasta(elemento, retraso = 0) {
 }
 
 
-/* ---------- 7. Dentro, fuera o en la barra: línea que avanza con los sitios ---------- */
-function animarSitios() {
-  const pasos = document.querySelector(".sitios__pasos");
-  if (!pasos) return;
+/* ---------- 7. El local: los paneles se descubren de abajo arriba, uno tras otro ----------
+   La foto de dentro se aleja un poco a la vez y el nombre sube al final.
+   Al terminar se quitan los estilos de GSAP para que el panel vuelva a abrirse con CSS. */
+function animarLocal() {
+  const paneles = gsap.utils.toArray(".local .panel");
+  if (!paneles.length) return;
+  const fotos = paneles.map((p) => p.querySelector(".panel__foto"));
+  const textos = paneles.map((p) => p.querySelector(".panel__texto"));
 
-  // Los nombres (La sala, La barra...) suben al entrar
-  pasos.querySelectorAll(".sitios__marca").forEach((marca) => {
-    gsap.from(marca, { yPercent: 60, rotation: 3, autoAlpha: 0, duration: 1, scrollTrigger: { trigger: marca, start: "top 85%", once: true } });
-  });
-
-  gsap.matchMedia().add(ESCRITORIO, () => {
-    const linea = document.createElement("span");
-    linea.className = "sitios__linea";
-    linea.setAttribute("aria-hidden", "true");
-    linea.innerHTML = "<span></span><i></i>";
-    pasos.prepend(linea);
-    const recorrido = { trigger: pasos, start: "top 55%", end: "bottom 55%", scrub: 0.6 };
-    gsap.fromTo(linea.querySelector("span"), { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: recorrido });
-    gsap.fromTo(linea.querySelector("i"), { top: "0%" }, { top: "100%", ease: "none", scrollTrigger: recorrido });
-
-    // La foto fija se acerca un poco mientras pasan los sitios
-    const visual = document.querySelector(".sitios__visual .marco");
-    if (visual) gsap.fromTo(visual, { scale: 0.92 }, { scale: 1, ease: "none", scrollTrigger: { trigger: pasos, start: "top bottom", end: "top 30%", scrub: true } });
-
-    return () => linea.remove();
-  });
+  gsap.timeline({ scrollTrigger: { trigger: ".local__paneles", start: "top 82%", once: true } })
+    .fromTo(paneles,
+      { clipPath: "inset(100% 0% 0% 0% round 22px)" },
+      { clipPath: "inset(0% 0% 0% 0% round 22px)", duration: 1.4, ease: "expo.out", stagger: 0.14, clearProps: "clipPath" })
+    .fromTo(fotos, { scale: 1.3 }, { scale: 1, duration: 1.8, ease: "expo.out", stagger: 0.14, clearProps: "transform" }, 0)
+    .from(textos, { autoAlpha: 0, y: 26, duration: 0.9, stagger: 0.14, clearProps: "all" }, 0.5);
 }
 
 

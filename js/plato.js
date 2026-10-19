@@ -29,7 +29,7 @@ function pintarFicha() {
 
   const etiquetas = (plato.etiquetas || [])
     .map((e) => `<li class="etiqueta etiqueta--${e}">${ETIQUETAS[e]}</li>`).join("");
-  const marcos = ["marco--rojo", "marco--mostaza", "marco--verde"];
+  const marcos = ["marco--rojo", "marco--negro", "marco--verde"];
   const color = marcos[PLATOS.indexOf(plato) % marcos.length];
 
   ficha.innerHTML = `

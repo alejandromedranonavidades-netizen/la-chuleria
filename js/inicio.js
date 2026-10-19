@@ -46,21 +46,16 @@ function pintarDestacados() {
 }
 
 
-/* "Dentro o fuera": al bajar, se ilumina el sitio que está en pantalla
-   y la foto fija de la izquierda cambia a la de ese sitio */
-function iniciarSitios() {
-  const pasos = document.querySelectorAll(".sitios__paso");
-  const fotos = document.querySelectorAll(".sitios__visual .foto");
-  if (!pasos.length || !("IntersectionObserver" in window)) return;
-  const activar = (i) => {
-    pasos.forEach((p, j) => p.classList.toggle("activo", i === j));
-    fotos.forEach((f, j) => f.classList.toggle("activa", i === j));
-  };
-  const observador = new IntersectionObserver((entradas) => {
-    entradas.forEach((e) => { if (e.isIntersecting) activar([...pasos].indexOf(e.target)); });
-  }, { rootMargin: "-45% 0px -45% 0px" });
-  pasos.forEach((p) => observador.observe(p));
-  activar(0);
+/* El local: el panel que señalas con el ratón (o tocas) se abre y los otros se estrechan.
+   En el móvil el CSS los enseña todos abiertos, uno debajo de otro. */
+function iniciarLocal() {
+  const paneles = [...document.querySelectorAll(".local .panel")];
+  if (!paneles.length) return;
+  const abrir = (panel) => paneles.forEach((p) => p.classList.toggle("activo", p === panel));
+  paneles.forEach((panel) => {
+    panel.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") abrir(panel); });
+    panel.addEventListener("click", () => abrir(panel));
+  });
 }
 
 
@@ -163,7 +158,7 @@ function pintarVisitanos() {
 document.addEventListener("DOMContentLoaded", () => {
   prepararReservaRapida();
   pintarDestacados();
-  iniciarSitios();
+  iniciarLocal();
   pintarArroces();
   pintarPestanas();
   pintarVisitanos();
