@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <!-- SEO: título y descripción únicos para cada página -->
+  <title>Plato | La Chulería, bar y restaurante en Valdemoro</title>
+  <meta name="description" content="Ingredientes, precio y fotos de los platos de La Chulería, bar y restaurante en Valdemoro.">
+  <!-- PROPUESTA DE DISEÑO: mientras no sea la web oficial del restaurante, que Google no la muestre.
+       Cuando se publique como web oficial, cambia "noindex, nofollow" por "index, follow". -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://lachuleria.es/plato.html">
+
+  <!-- Cómo se ve al compartir el enlace (WhatsApp, redes sociales) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:site_name" content="La Chulería">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Plato | La Chulería, bar y restaurante en Valdemoro">
+  <meta property="og:description" content="Ingredientes, precio y fotos de los platos de La Chulería, bar y restaurante en Valdemoro.">
+  <meta property="og:image" content="https://alejandromedranonavidades-netizen.github.io/la-chuleria/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Iconos -->
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#17463B">
+
+  <!-- Velocidad: conexión anticipada con los servidores de fuentes, fotos y librerías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lachuleria.es">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/plato.js" defer></script>
+  <!-- Animaciones: GSAP (con ScrollTrigger y SplitText) y scroll suave con Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</head>
+<body class="pagina-plato">
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
+        <span class="logo__circulo" aria-hidden="true"></span>
+        <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="carta.html">Carta</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario y ubicación</a>
+        <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
+      </nav>
+
+      <button class="cabecera__boton-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- La ficha se pinta desde js/plato.js según la dirección: plato.html?id=bravas -->
+    <article class="contenedor ficha" id="ficha"></article>
+
+    <section class="seccion relacionados" id="relacionados" hidden>
+      <div class="contenedor">
+        <h2 class="titulo-seccion">También de esta <em>sección</em></h2>
+        <ul class="lista-carta" id="lista-relacionados"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor pie__rejilla">
+      <div>
+        <a class="logo logo--pie" href="index.html" aria-label="La Chulería, ir al inicio">
+          <span class="logo__circulo" aria-hidden="true"></span>
+          <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+        </a>
+        <p class="pie__lema"><span data-dato="direccion"></span>, <span data-dato="ciudad"></span>.</p>
+        <p class="pie__contacto">
+          <a data-enlace="telefono">Reservas: <span data-dato="telefono"></span></a>
+          <a data-enlace="email"><span data-dato="email"></span></a>
+        </p>
+      </div>
+      <nav class="pie__nav" aria-label="Pie de página">
+        <a href="carta.html">Carta</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario</a>
+        <a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a>
+        <a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a>
+        <a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a>
+        <a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+      <div class="pie__legal">
+        <p>© <span class="anio-actual">2026</span> La Chulería · Propuesta de diseño, no es la web oficial del restaurante.</p>
+        <nav class="pie__nav-legal" aria-label="Información legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <button type="button" data-abrir-cookies>Configurar cookies</button>
+        </nav>
+      </div>
+    </div>
+    <p class="pie__marca" aria-hidden="true">Chulería</p>
+  </footer>
+
+</body>
+</html>

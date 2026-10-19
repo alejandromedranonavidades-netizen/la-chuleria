@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <!-- SEO: título y descripción únicos para cada página -->
+  <title>Reservar mesa | La Chulería, Valdemoro</title>
+  <meta name="description" content="Reserva tu mesa en La Chulería, bar y restaurante en Valdemoro: elige día, hora y número de personas, en sala o en terraza. También por teléfono en el 915 04 38 19.">
+  <!-- PROPUESTA DE DISEÑO: mientras no sea la web oficial del restaurante, que Google no la muestre.
+       Cuando se publique como web oficial, cambia "noindex, nofollow" por "index, follow". -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://lachuleria.es/reservas.html">
+
+  <!-- Cómo se ve al compartir el enlace (WhatsApp, redes sociales) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:site_name" content="La Chulería">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Reservar mesa | La Chulería, Valdemoro">
+  <meta property="og:description" content="Reserva tu mesa en La Chulería, bar y restaurante en Valdemoro: elige día, hora y número de personas, en sala o en terraza. También por teléfono en el 915 04 38 19.">
+  <meta property="og:image" content="https://alejandromedranonavidades-netizen.github.io/la-chuleria/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Iconos -->
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#17463B">
+
+  <!-- Velocidad: conexión anticipada con los servidores de fuentes, fotos y librerías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lachuleria.es">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/reservas.js" defer></script>
+  <!-- Animaciones: GSAP (con ScrollTrigger y SplitText) y scroll suave con Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</head>
+<body class="pagina-reservas">
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
+        <span class="logo__circulo" aria-hidden="true"></span>
+        <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="carta.html">Carta</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario y ubicación</a>
+        <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
+      </nav>
+
+      <button class="cabecera__boton-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <section class="cabeza-pagina cabeza-pagina--foto">
+      <div class="cabeza-pagina__fondo">
+        <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5643-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5643-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5643-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5643-1536x1022.jpg 1536w" sizes="100vw" width="1024" height="681" alt="" fetchpriority="high" decoding="async" data-parallax>
+      </div>
+      <div class="contenedor">
+        <h1 class="cabeza-pagina__titulo">Reservar mesa</h1>
+        <p class="cabeza-pagina__texto">Elige día, hora y cuántos sois. Te confirmamos la reserva por teléfono o por email.</p>
+        
+      </div>
+    </section>
+
+    <div class="contenedor reservas__rejilla">
+
+      <!-- ===================== FORMULARIO ===================== -->
+      <div class="reservas__caja" id="caja-reserva">
+        <form class="formulario" id="formulario-reserva" novalidate>
+
+          <!-- Antispam: campo trampa invisible. Las personas no lo ven; los robots lo rellenan
+               y la reserva se descarta. Se llama _gotcha porque así lo reconoce Formspree. -->
+          <div class="campo-trampa" aria-hidden="true">
+            <label for="_gotcha">No rellenes este campo</label>
+            <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+
+          <fieldset>
+            <legend>Tu mesa</legend>
+
+            <div class="campo">
+              <label for="fecha">Día</label>
+              <input type="date" id="fecha" name="fecha" required>
+              <p class="campo__error" aria-live="polite"></p>
+            </div>
+
+            <div class="campo">
+              <label for="hora">Hora</label>
+              <select id="hora" name="hora" required disabled>
+                <option value="">Elige primero el día</option>
+              </select>
+              <p class="campo__error" aria-live="polite"></p>
+            </div>
+
+            <div class="campo">
+              <label for="personas">Personas</label>
+              <div class="contador">
+                <button type="button" class="contador__boton" data-cambio="-1" aria-label="Una persona menos">−</button>
+                <input type="number" id="personas" name="personas" value="2" min="1" inputmode="numeric" required>
+                <button type="button" class="contador__boton" data-cambio="1" aria-label="Una persona más">+</button>
+              </div>
+              <p class="campo__ayuda" id="ayuda-personas"></p>
+            </div>
+
+            <div class="campo">
+              <span class="campo__etiqueta" id="etiqueta-zona">Zona</span>
+              <div class="opciones" role="radiogroup" aria-labelledby="etiqueta-zona">
+                <label class="opcion"><input type="radio" name="zona" value="Sala" checked><span>Sala</span></label>
+                <label class="opcion"><input type="radio" name="zona" value="Terraza"><span>Terraza</span></label>
+                <label class="opcion"><input type="radio" name="zona" value="Sin preferencia"><span>Me da igual</span></label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tus datos</legend>
+
+            <div class="campo campo--ancho">
+              <label for="nombre">Nombre y apellido</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" required>
+              <p class="campo__error" aria-live="polite"></p>
+            </div>
+
+            <div class="campo">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" autocomplete="tel" maxlength="20" required>
+              <p class="campo__error" aria-live="polite"></p>
+            </div>
+
+            <div class="campo">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" maxlength="120" required>
+              <p class="campo__error" aria-live="polite"></p>
+            </div>
+
+            <div class="campo campo--ancho">
+              <label for="notas">Alergias, celebraciones u otras peticiones <span class="opcional">(opcional)</span></label>
+              <textarea id="notas" name="notas" rows="3" maxlength="500" placeholder="Ej.: uno de nosotros es celíaco, venimos con un carrito de bebé, es un cumpleaños..."></textarea>
+            </div>
+
+            <div class="campo campo--ancho">
+              <label class="casilla">
+                <input type="checkbox" id="acepto" name="acepto" required>
+                <span>He leído la <a href="privacidad.html" target="_blank">política de privacidad</a> y acepto que tratéis mis datos, incluidas las alergias que indique, para gestionar esta reserva.</span>
+              </label>
+              <p class="campo__error" aria-live="polite"></p>
+            </div>
+          </fieldset>
+
+          <p class="formulario__aviso-error" id="aviso-envio" role="alert" hidden></p>
+          <button type="submit" class="boton boton--rojo boton--ancho">Reservar mesa</button>
+
+          <!-- Información básica de protección de datos (obligatoria junto al formulario) -->
+          <p class="formulario__privacidad">
+            <strong>Responsable:</strong> <span data-legal="titular"></span>.
+            <strong>Finalidad:</strong> gestionar tu reserva y avisarte si hay cambios.
+            <strong>Derechos:</strong> acceder, rectificar y suprimir tus datos escribiendo a
+            <span data-legal="emailPrivacidad"></span>.
+            Más información en la <a href="privacidad.html">política de privacidad</a>.
+          </p>
+        </form>
+      </div>
+
+      <!-- ===================== INFORMACIÓN LATERAL ===================== -->
+      <aside class="reservas__lateral">
+        <div class="lateral__bloque">
+          <h2>Horario</h2>
+          <p class="estado"><span class="estado__punto" aria-hidden="true"></span><span class="estado__texto"></span></p>
+          <table class="tabla-horario"></table>
+          <p class="visitanos__cocina" data-dato="notaCocina"></p>
+        </div>
+
+        <div class="lateral__bloque">
+          <h2>¿Prefieres llamar?</h2>
+          <p>Reservas por teléfono en el <a data-enlace="telefono"><span data-dato="telefono"></span></a>.</p>
+        </div>
+
+        <div class="lateral__bloque">
+          <h2>¿Sois más de <span class="max-personas">12</span> o es una celebración?</h2>
+          <p>Preparamos menús especiales para cumpleaños, comuniones, fiestas y reuniones. Llámanos y te contamos.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor pie__rejilla">
+      <div>
+        <a class="logo logo--pie" href="index.html" aria-label="La Chulería, ir al inicio">
+          <span class="logo__circulo" aria-hidden="true"></span>
+          <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+        </a>
+        <p class="pie__lema"><span data-dato="direccion"></span>, <span data-dato="ciudad"></span>.</p>
+        <p class="pie__contacto">
+          <a data-enlace="telefono">Reservas: <span data-dato="telefono"></span></a>
+          <a data-enlace="email"><span data-dato="email"></span></a>
+        </p>
+      </div>
+      <nav class="pie__nav" aria-label="Pie de página">
+        <a href="carta.html">Carta</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario</a>
+        <a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a>
+        <a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a>
+        <a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a>
+        <a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+      <div class="pie__legal">
+        <p>© <span class="anio-actual">2026</span> La Chulería · Propuesta de diseño, no es la web oficial del restaurante.</p>
+        <nav class="pie__nav-legal" aria-label="Información legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <button type="button" data-abrir-cookies>Configurar cookies</button>
+        </nav>
+      </div>
+    </div>
+    <p class="pie__marca" aria-hidden="true">Chulería</p>
+  </footer>
+
+</body>
+</html>

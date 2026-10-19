@@ -1,0 +1,6 @@
+# PROPUESTA DE DISEÑO: mientras no sea la web oficial del restaurante, los buscadores no la indexan.
+# Cuando se publique como web oficial, cambia "Disallow: /" por "Allow: /".
+User-agent: *
+Disallow: /
+
+Sitemap: https://lachuleria.es/sitemap.xml

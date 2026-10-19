@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <!-- SEO: título y descripción únicos para cada página -->
+  <title>Política de cookies | La Chulería</title>
+  <meta name="description" content="Qué cookies usa la web de La Chulería y cómo aceptarlas, rechazarlas o cambiar tu elección.">
+  <!-- PROPUESTA DE DISEÑO: mientras no sea la web oficial del restaurante, que Google no la muestre.
+       Cuando se publique como web oficial, cambia "noindex, nofollow" por "index, follow". -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://lachuleria.es/cookies.html">
+
+  <!-- Cómo se ve al compartir el enlace (WhatsApp, redes sociales) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:site_name" content="La Chulería">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Política de cookies | La Chulería">
+  <meta property="og:description" content="Qué cookies usa la web de La Chulería y cómo aceptarlas, rechazarlas o cambiar tu elección.">
+  <meta property="og:image" content="https://alejandromedranonavidades-netizen.github.io/la-chuleria/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Iconos -->
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#17463B">
+
+  <!-- Velocidad: conexión anticipada con los servidores de fuentes, fotos y librerías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lachuleria.es">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <!-- Animaciones: GSAP (con ScrollTrigger y SplitText) y scroll suave con Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</head>
+<body class="pagina-legal">
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
+        <span class="logo__circulo" aria-hidden="true"></span>
+        <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="carta.html">Carta</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario y ubicación</a>
+        <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
+      </nav>
+
+      <button class="cabecera__boton-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="cabeza-pagina cabeza-pagina--corta">
+      <div class="contenedor">
+        <h1 class="cabeza-pagina__titulo">Política de cookies</h1>
+        <p class="cabeza-pagina__texto">Última actualización: <span data-legal="actualizado"></span></p>
+      </div>
+    </section>
+
+    <article class="contenedor texto-legal">
+      <p class="texto-legal__nota">
+        Texto de ejemplo para una propuesta de diseño. Antes de publicar la web, hay que completar los datos
+        del titular en <code>js/datos.js</code> (los marcados como pendientes) y que lo revise un profesional.
+      </p>
+
+      <h2>Qué son las cookies</h2>
+      <p>Son pequeños archivos que una web guarda en tu navegador para recordar información sobre tu visita. Algunas son necesarias para que la web funcione y otras sirven, por ejemplo, para medir las visitas.</p>
+
+      <h2>Cookies que usa esta web</h2>
+      <div class="tabla-desplazable">
+        <table class="tabla-cookies">
+          <thead>
+            <tr><th scope="col">Nombre</th><th scope="col">Quién la instala</th><th scope="col">Para qué</th><th scope="col">Duración</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>consentimiento-cookies</td><td>Esta web</td><td>Recordar si aceptas o rechazas las cookies. Es necesaria.</td><td>Hasta que la borres</td></tr>
+            <tr><td>_ga, _ga_*</td><td>Google Analytics</td><td>Contar visitas y saber qué páginas se ven más. Solo si la aceptas.</td><td>2 años</td></tr>
+            <tr><td>NID, AEC y otras</td><td>Google Maps</td><td>Mostrar el mapa con la ubicación. Solo si aceptas o pulsas "Mostrar el mapa".</td><td>Hasta 6 meses</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>La web también usa Google Fonts para las tipografías y carga las fotos desde el servidor del restaurante. Estos servicios no instalan cookies, pero reciben la dirección IP de tu dispositivo para enviarte los archivos.</p>
+
+      <h2>Cómo aceptar, rechazar o cambiar tu elección</h2>
+      <p>La primera vez que entras te preguntamos. Rechazar es igual de fácil que aceptar, y puedes cambiar de opinión en cualquier momento:</p>
+      <p><button type="button" class="boton boton--contorno" data-abrir-cookies>Configurar cookies</button></p>
+      <p>También puedes borrar las cookies desde la configuración de tu navegador: <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/es/kb/Borrar%20cookies" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a> o <a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Edge</a>.</p>
+
+    </article>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor pie__rejilla">
+      <div>
+        <a class="logo logo--pie" href="index.html" aria-label="La Chulería, ir al inicio">
+          <span class="logo__circulo" aria-hidden="true"></span>
+          <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+        </a>
+        <p class="pie__lema"><span data-dato="direccion"></span>, <span data-dato="ciudad"></span>.</p>
+        <p class="pie__contacto">
+          <a data-enlace="telefono">Reservas: <span data-dato="telefono"></span></a>
+          <a data-enlace="email"><span data-dato="email"></span></a>
+        </p>
+      </div>
+      <nav class="pie__nav" aria-label="Pie de página">
+        <a href="carta.html">Carta</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario</a>
+        <a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a>
+        <a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a>
+        <a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a>
+        <a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+      <div class="pie__legal">
+        <p>© <span class="anio-actual">2026</span> La Chulería · Propuesta de diseño, no es la web oficial del restaurante.</p>
+        <nav class="pie__nav-legal" aria-label="Información legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <button type="button" data-abrir-cookies>Configurar cookies</button>
+        </nav>
+      </div>
+    </div>
+    <p class="pie__marca" aria-hidden="true">Chulería</p>
+  </footer>
+
+</body>
+</html>

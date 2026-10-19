@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <!-- SEO: título y descripción únicos para cada página -->
+  <title>Carta | La Chulería, bar y restaurante en Valdemoro</title>
+  <meta name="description" content="Carta de La Chulería en Valdemoro: entrantes para picar, ensaladas, arroces de la casa, pescados, carnes, menú para peques, postres, vinos y cervezas, con precios.">
+  <!-- PROPUESTA DE DISEÑO: mientras no sea la web oficial del restaurante, que Google no la muestre.
+       Cuando se publique como web oficial, cambia "noindex, nofollow" por "index, follow". -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://lachuleria.es/carta.html">
+
+  <!-- Cómo se ve al compartir el enlace (WhatsApp, redes sociales) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:site_name" content="La Chulería">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Carta | La Chulería, bar y restaurante en Valdemoro">
+  <meta property="og:description" content="Carta de La Chulería en Valdemoro: entrantes para picar, ensaladas, arroces de la casa, pescados, carnes, menú para peques, postres, vinos y cervezas, con precios.">
+  <meta property="og:image" content="https://alejandromedranonavidades-netizen.github.io/la-chuleria/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Iconos -->
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#17463B">
+
+  <!-- Velocidad: conexión anticipada con los servidores de fuentes, fotos y librerías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lachuleria.es">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/carta.js" defer></script>
+  <!-- Animaciones: GSAP (con ScrollTrigger y SplitText) y scroll suave con Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</head>
+<body class="pagina-carta">
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
+        <span class="logo__circulo" aria-hidden="true"></span>
+        <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="carta.html">Carta</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario y ubicación</a>
+        <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
+      </nav>
+
+      <button class="cabecera__boton-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <section class="cabeza-pagina cabeza-pagina--foto">
+      <div class="cabeza-pagina__fondo">
+        <img src="https://lachuleria.es/wp-content/uploads/2024/03/PALETILLA-IBERICA-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/PALETILLA-IBERICA-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/PALETILLA-IBERICA-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/PALETILLA-IBERICA-1536x1022.jpg 1536w" sizes="100vw" width="1024" height="681" alt="" fetchpriority="high" decoding="async" data-parallax>
+      </div>
+      <div class="contenedor">
+        <h1 class="cabeza-pagina__titulo">La carta</h1>
+        <p class="cabeza-pagina__texto">Tapas para compartir, arroces de la casa, carnes, pescados y postres caseros. Si tienes alguna alergia o intolerancia, díselo a nuestro equipo y te contamos qué lleva cada plato.</p>
+        
+      </div>
+    </section>
+
+    <!-- Navegación por categorías (se queda fija al bajar) -->
+    <div class="carta-nav">
+      <div class="contenedor carta-nav__fila">
+        <nav class="carta-nav__categorias" id="carta-categorias" aria-label="Categorías"></nav>
+        <label class="buscador">
+          <span class="visualmente-oculto">Buscar en la carta</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <input type="search" id="buscar-carta" placeholder="Buscar: croquetas, pulpo, queso..." autocomplete="off">
+        </label>
+      </div>
+    </div>
+
+    <div class="contenedor carta-completa" id="carta-completa">
+      <!-- Se rellena desde js/carta.js -->
+    </div>
+
+    <p class="contenedor carta-vacia" id="carta-vacia" hidden>
+      No hay nada en la carta con "<span id="texto-buscado"></span>". Prueba con otra palabra.
+    </p>
+
+    <section class="llamada llamada--corta">
+      <div class="contenedor llamada__contenido">
+        <h2 class="llamada__titulo">¿Ya sabes lo que vas a pedir? <em>Te guardamos la mesa.</em></h2>
+        <div class="llamada__acciones">
+          <a class="boton boton--rojo" href="reservas.html">Reservar mesa</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor pie__rejilla">
+      <div>
+        <a class="logo logo--pie" href="index.html" aria-label="La Chulería, ir al inicio">
+          <span class="logo__circulo" aria-hidden="true"></span>
+          <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+        </a>
+        <p class="pie__lema"><span data-dato="direccion"></span>, <span data-dato="ciudad"></span>.</p>
+        <p class="pie__contacto">
+          <a data-enlace="telefono">Reservas: <span data-dato="telefono"></span></a>
+          <a data-enlace="email"><span data-dato="email"></span></a>
+        </p>
+      </div>
+      <nav class="pie__nav" aria-label="Pie de página">
+        <a href="carta.html">Carta</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario</a>
+        <a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a>
+        <a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a>
+        <a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a>
+        <a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+      <div class="pie__legal">
+        <p>© <span class="anio-actual">2026</span> La Chulería · Propuesta de diseño, no es la web oficial del restaurante.</p>
+        <nav class="pie__nav-legal" aria-label="Información legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <button type="button" data-abrir-cookies>Configurar cookies</button>
+        </nav>
+      </div>
+    </div>
+    <p class="pie__marca" aria-hidden="true">Chulería</p>
+  </footer>
+
+</body>
+</html>

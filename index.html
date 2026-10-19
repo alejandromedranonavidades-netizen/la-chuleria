@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <!-- SEO: título y descripción únicos para cada página -->
+  <title>La Chulería | Bar y restaurante en Valdemoro</title>
+  <meta name="description" content="Bar y restaurante en Valdemoro: bravas, arroces de la casa, carnes, pescados, buen vino y cerveza fría. Sala y terraza. Consulta la carta y reserva tu mesa.">
+  <!-- PROPUESTA DE DISEÑO: mientras no sea la web oficial del restaurante, que Google no la muestre.
+       Cuando se publique como web oficial, cambia "noindex, nofollow" por "index, follow". -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://lachuleria.es/">
+
+  <!-- Cómo se ve al compartir el enlace (WhatsApp, redes sociales) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:site_name" content="La Chulería">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="La Chulería | Bar y restaurante en Valdemoro">
+  <meta property="og:description" content="Bar y restaurante en Valdemoro: bravas, arroces de la casa, carnes, pescados, buen vino y cerveza fría. Sala y terraza. Consulta la carta y reserva tu mesa.">
+  <meta property="og:image" content="https://alejandromedranonavidades-netizen.github.io/la-chuleria/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Iconos -->
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#17463B">
+
+  <!-- Velocidad: conexión anticipada con los servidores de fuentes, fotos y librerías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lachuleria.es">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Figtree:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <!-- Intro con el logo: solo la primera vez que se entra en la sesión -->
+  <script>(function(){try{if(sessionStorage.getItem("intro-vista")||matchMedia("(prefers-reduced-motion: reduce)").matches)return;document.documentElement.classList.add("intro-pendiente");window.__temporizadorIntro=setTimeout(function(){document.documentElement.classList.remove("intro-pendiente");},2500);}catch(e){}})();</script>
+  <link rel="preload" as="image" imagesrcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-1536x1022.jpg 1536w" imagesizes="100vw" fetchpriority="high">
+  <!-- Datos estructurados: Google entiende que es un restaurante, dónde está y su horario -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "La Chulería",
+    "description": "Bar y restaurante de cocina española en Valdemoro: tapas, arroces de la casa, carnes, pescados, vinos y cervezas. Sala y terraza.",
+    "url": "https://lachuleria.es",
+    "image": "https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-1536x1022.jpg",
+    "telephone": "+34 915 04 38 19",
+    "email": "chulebaryrestaurante@hotmail.com",
+    "servesCuisine": ["Española", "Cocina de mercado", "Arroces", "Tapas"],
+    "priceRange": "20-30 €",
+    "acceptsReservations": "True",
+    "hasMenu": "https://lachuleria.es/carta.html",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Glorieta de las Amazonas, 25",
+      "addressLocality": "Valdemoro",
+      "postalCode": "28341",
+      "addressRegion": "Madrid",
+      "addressCountry": "ES"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "12:30", "closes": "17:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "20:00", "closes": "01:00" }
+    ]
+  }
+  </script>
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/inicio.js" defer></script>
+  <!-- Animaciones: GSAP (con ScrollTrigger y SplitText) y scroll suave con Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</head>
+<body class="pagina-inicio">
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- Intro de la primera visita: solo se ve si el navegador la activa (ver <head>) -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__marca">
+      <svg class="intro__circulo" viewBox="0 0 200 200"><circle cx="100" cy="100" r="96"/></svg>
+      <span class="intro__nombre">La Chulería</span>
+      <span class="intro__sub">Bar &amp; restaurante</span>
+    </div>
+  </div>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
+        <span class="logo__circulo" aria-hidden="true"></span>
+        <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="carta.html">Carta</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario y ubicación</a>
+        <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
+      </nav>
+
+      <button class="cabecera__boton-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===================== PORTADA ===================== -->
+    <section class="portada">
+      <div class="portada__fondo">
+        <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5617-1536x1022.jpg 1536w" sizes="100vw" width="1024" height="681" alt="Sala de La Chulería con banquetas rojas, ladrillo visto y mesas de madera" fetchpriority="high" decoding="async">
+      </div>
+      <div class="contenedor portada__contenido">
+        <p class="estado estado--chip"><span class="estado__punto" aria-hidden="true"></span><span class="estado__texto">Consultando horario</span></p>
+        <p class="portada__lema">Bar &amp; restaurante en Valdemoro</p>
+        <h1 class="portada__titulo">
+          <span class="linea"><span>Cocina de mercado</span></span>
+          <span class="linea"><span>con mucha <em class="portada__acento">chulería</em></span></span>
+        </h1>
+        <p class="portada__intro">
+          Bravas de las que se piden dos veces, arroces de la casa, buen vino y cerveza bien fría.
+          En la sala o en la terraza.
+        </p>
+
+        <!-- Reserva rápida: lleva al formulario con estos datos ya rellenos -->
+        <form class="reserva-rapida portada__acciones" action="reservas.html" method="get" aria-label="Reserva rápida">
+          <label class="reserva-rapida__campo">
+            <span>Día</span>
+            <select name="fecha" id="rr-fecha"></select>
+          </label>
+          <label class="reserva-rapida__campo">
+            <span>Hora</span>
+            <select name="hora" id="rr-hora"></select>
+          </label>
+          <label class="reserva-rapida__campo reserva-rapida__campo--corto">
+            <span>Personas</span>
+            <select name="personas" id="rr-personas"></select>
+          </label>
+          <button type="submit" class="boton boton--rojo">Reservar mesa</button>
+        </form>
+      </div>
+
+      <a class="sello portada__sello" data-enlace="resenasGoogle" target="_blank" rel="noopener"></a>
+
+      <div class="contenedor portada__pie">
+        <a class="enlace-flecha enlace-flecha--claro" href="carta.html">Ver la carta</a>
+        <ul class="franja-info">
+          <li><a data-enlace="mapa" target="_blank" rel="noopener"><span data-dato="direccion"></span>, Valdemoro</a></li>
+          <li><a data-enlace="telefono"><span data-dato="telefono"></span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== CINTA ===================== -->
+    <div class="cinta" aria-hidden="true">
+      <div class="cinta__pista">
+        <div class="cinta__grupo"><span class="cinta__item">Las bravas más chulas</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Arroces de la casa</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Sala y terraza</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Vinos y cervezas</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Menús para eventos</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Para llevar y a domicilio</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg></div>
+        <div class="cinta__grupo"><span class="cinta__item">Las bravas más chulas</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Arroces de la casa</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Sala y terraza</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Vinos y cervezas</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Menús para eventos</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg><span class="cinta__item">Para llevar y a domicilio</span><svg class="icono-estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9h8.3l-6.7 4.9 2.6 7.9L12 17.3l-6.8 4.9 2.6-7.9-6.7-4.9h8.3z"/></svg></div>
+      </div>
+    </div>
+
+    <!-- ===================== NOSOTROS ===================== -->
+    <section class="seccion nosotros fondo-azulejo" id="nosotros">
+      <div class="contenedor nosotros__rejilla">
+        <div class="nosotros__collage">
+          <figure class="marco marco--rojo nosotros__grande">
+            <div class="foto">
+              <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-830x1024.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-768x948.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-830x1024.jpg 830w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5669-1244x1536.jpg 1244w" sizes="(max-width: 860px) 80vw, 36vw" width="830" height="1024" alt="Mesa con flores frescas junto a las banquetas rojas de la sala" loading="lazy" decoding="async" data-parallax>
+            </div>
+          </figure>
+          <figure class="marco marco--circulo marco--mostaza nosotros__pequena">
+            <div class="foto">
+              <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-1024x783.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-768x587.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-1024x783.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5771-1536x1174.jpg 1536w" sizes="(max-width: 860px) 45vw, 18vw" width="1024" height="783" alt="La barra con los grifos de cerveza y las copas colgadas" loading="lazy" decoding="async">
+            </div>
+          </figure>
+        </div>
+
+        <div class="nosotros__texto revelar">
+          <p class="antetitulo">Nuestra historia</p>
+          <h2 class="titulo-seccion">De un pueblo de Jaén <em>a Valdemoro</em></h2>
+          <p class="entradilla">
+            Tíscar y Juanma llegaron a Madrid desde un pequeño pueblo de Jaén. En Valdemoro formaron su familia
+            y, con la ayuda de los amigos, abrieron La Chulería.
+          </p>
+          <p>
+            En la cocina mandan el mercado y las recetas de la casa: la paella de Juanma, el gambón al ajillo
+            al estilo de Ana y el arroz de nuestro chef, Alfredo. Y en la barra, una carta de vinos cuidada
+            y cervezas para todos los gustos.
+          </p>
+          <dl class="cifras">
+            <div><dt>Nota en Google</dt><dd data-dato="valoracion.nota">4,6</dd></div>
+            <div><dt>Reseñas en Google</dt><dd data-dato="valoracion.resenas">815</dd></div>
+            <div><dt>Por persona</dt><dd data-dato="precioMedio" data-no-contar>20–30 €</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DENTRO, FUERA O EN LA BARRA ===================== -->
+    <section class="seccion seccion--oscura sitios" id="sitios" aria-labelledby="sitios-titulo">
+      <div class="contenedor">
+        <div class="cabeza-seccion revelar">
+          <h2 class="titulo-seccion" id="sitios-titulo">Dentro, fuera <em>o en la barra</em></h2>
+          <p class="cabeza-seccion__texto">Tres sitios para quedarte, según el plan que traigas.</p>
+        </div>
+
+        <div class="sitios__rejilla">
+          <!-- Foto fija que cambia según el sitio que estés leyendo -->
+          <div class="sitios__visual" aria-hidden="true">
+            <figure class="marco marco--mostaza">
+              <div class="foto activa"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1536x1022.jpg 1536w" sizes="(max-width: 1024px) 90vw, 44vw" width="1024" height="681" alt="" loading="lazy" decoding="async"></div>
+              <div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1536x1022.jpg 1536w" sizes="(max-width: 1024px) 90vw, 44vw" width="1024" height="681" alt="" loading="lazy" decoding="async"></div>
+              <div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1536x1022.jpg 1536w" sizes="(max-width: 1024px) 90vw, 44vw" width="1024" height="681" alt="" loading="lazy" decoding="async"></div>
+            </figure>
+          </div>
+
+          <ol class="sitios__pasos">
+            <li class="sitios__paso activo">
+              <p class="sitios__marca">La sala</p>
+              <h3 class="sitios__titulo">Para comer sin prisa</h3>
+              <p>Banquetas rojas, ladrillo visto y mesas de madera. Un sitio cálido para la comida del domingo o una cena con amigos.</p>
+              <figure class="marco marco--mostaza sitios__foto-movil"><div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1536x1022.jpg 1536w" sizes="90vw" width="1024" height="681" alt="La sala con banquetas rojas y ventanales" loading="lazy" decoding="async"></div></figure>
+            </li>
+            <li class="sitios__paso">
+              <p class="sitios__marca">La barra</p>
+              <h3 class="sitios__titulo">Para picar algo y brindar</h3>
+              <p>Cervezas nacionales y del mundo, vinos de Ribera, Rioja, Rueda o Rías Baixas y algo rico para acompañar.</p>
+              <figure class="marco marco--mostaza sitios__foto-movil"><div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1536x1022.jpg 1536w" sizes="90vw" width="1024" height="681" alt="Copas colgadas sobre la barra" loading="lazy" decoding="async"></div></figure>
+            </li>
+            <li class="sitios__paso">
+              <p class="sitios__marca">La terraza</p>
+              <h3 class="sitios__titulo">Para las tardes largas</h3>
+              <p>Mesas al aire libre para comer, cenar o alargar la sobremesa cuando hace bueno.</p>
+              <figure class="marco marco--mostaza sitios__foto-movil"><div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/01/DSC5622-1536x1022.jpg 1536w" sizes="90vw" width="1024" height="681" alt="Salida a la terraza desde el comedor" loading="lazy" decoding="async"></div></figure>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LOS IMPRESCINDIBLES ===================== -->
+    <section class="seccion destacados" id="imprescindibles" aria-labelledby="destacados-titulo">
+      <div class="contenedor destacados__cabeza">
+        <div>
+          <h2 class="titulo-seccion" id="destacados-titulo">Los <em>imprescindibles</em></h2>
+          <p class="cabeza-seccion__texto">Lo que no te puedes ir sin probar. Desliza para ver más y toca un plato para verlo de cerca.</p>
+        </div>
+        <div class="carrusel__controles">
+          <button type="button" class="carrusel__boton" data-carrusel="anterior" aria-label="Platos anteriores">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button type="button" class="carrusel__boton" data-carrusel="siguiente" aria-label="Más platos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Se rellena desde js/inicio.js con los platos marcados como "destacado" -->
+      <div class="carrusel" tabindex="0" aria-label="Platos imprescindibles">
+        <ul class="carrusel__pista" id="lista-destacados"></ul>
+      </div>
+      <div class="contenedor destacados__pie">
+        <div class="carrusel__progreso" aria-hidden="true"><span></span></div>
+        <a class="enlace-flecha" href="carta.html">Ver toda la carta</a>
+      </div>
+    </section>
+
+    <!-- ===================== ARROCES DE LA CASA ===================== -->
+    <section class="seccion arroces fondo-azulejo" id="arroces" aria-labelledby="arroces-titulo">
+      <div class="contenedor arroces__rejilla">
+        <div class="arroces__fotos">
+          <figure class="marco marco--rojo arroces__grande">
+            <div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/PAELLA-DE-SECRETO-2-1024x681.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/PAELLA-DE-SECRETO-2-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/PAELLA-DE-SECRETO-2-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/PAELLA-DE-SECRETO-2-1536x1022.jpg 1536w" sizes="(max-width: 860px) 92vw, 50vw" width="1024" height="681" alt="La paella de Juanma con secreto ibérico, pollo y verduras" loading="lazy" decoding="async"></div>
+          </figure>
+          <figure class="marco marco--circulo marco--verde arroces__pequena">
+            <div class="foto"><img src="https://lachuleria.es/wp-content/uploads/2024/03/ARROZ-NEGRO-1024x768.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/ARROZ-NEGRO-768x576.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/ARROZ-NEGRO-1024x768.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/ARROZ-NEGRO-1536x1152.jpg 1536w" sizes="(max-width: 860px) 40vw, 18vw" width="1024" height="768" alt="Arroz negro con calamarcitos" loading="lazy" decoding="async"></div>
+          </figure>
+        </div>
+        <div class="arroces__texto revelar">
+          <p class="antetitulo">La especialidad</p>
+          <h2 class="titulo-seccion" id="arroces-titulo">Arroces <em>de la casa</em></h2>
+          <p class="cabeza-seccion__texto">De la paella de Juanma al arroz de nuestro chef, Alfredo.</p>
+          <ul class="lista-carta lista-carta--una" id="lista-arroces"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== RESUMEN DE LA CARTA ===================== -->
+    <section class="seccion carta-resumen" id="carta">
+      <div class="contenedor">
+        <div class="cabeza-seccion revelar">
+          <h2 class="titulo-seccion">La <em>carta</em></h2>
+          <p class="cabeza-seccion__texto">Toca cualquier plato para verlo de cerca. Si tienes alguna alergia, díselo a nuestro equipo.</p>
+        </div>
+        <div class="pestanas revelar" role="tablist" aria-label="Categorías de la carta" id="pestanas-carta"></div>
+        <div class="carta-resumen__panel" id="panel-carta" role="tabpanel"></div>
+        <a class="enlace-flecha carta-resumen__todo" href="carta.html">Ver la carta completa, con bodega y cervezas</a>
+      </div>
+    </section>
+
+    <!-- ===================== EVENTOS Y A DOMICILIO ===================== -->
+    <section class="seccion planes" id="eventos">
+      <div class="contenedor planes__rejilla">
+        <article class="plan plan--eventos revelar">
+          <figure class="plan__foto foto">
+            <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5631-1024x682.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5631-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5631-1024x682.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5631-1536x1022.jpg 1536w" sizes="(max-width: 860px) 92vw, 30vw" width="1024" height="682" alt="Mesa puesta con flores, copas y platos" loading="lazy" decoding="async">
+          </figure>
+          <div class="plan__texto">
+            <p class="antetitulo">Celebraciones</p>
+            <h2 class="plan__titulo">Cumpleaños, comuniones y reuniones</h2>
+            <p>Preparamos menús especiales para eventos. Cuéntanos qué celebras y cuántos sois, y te proponemos un menú.</p>
+            <p class="plan__enlaces">
+              <a class="enlace-flecha" href="reservas.html?motivo=evento">Pedir información</a>
+              <a class="enlace-flecha" data-enlace="telefono">Llamar al <span data-dato="telefono"></span></a>
+            </p>
+          </div>
+        </article>
+
+        <article class="plan plan--casa revelar">
+          <div class="plan__texto">
+            <p class="antetitulo">En casa</p>
+            <h2 class="plan__titulo">La Chulería, a domicilio</h2>
+            <p>¿Plan de sofá? Pide nuestros platos a domicilio o llámanos y pásate a recogerlos.</p>
+            <ul class="plan__apps">
+              <li><a class="app" data-enlace="glovo" target="_blank" rel="noopener"><span class="app__marca app__marca--glovo" aria-hidden="true">G</span>Pedir en Glovo</a></li>
+              <li><a class="app" data-enlace="justEat" target="_blank" rel="noopener"><span class="app__marca app__marca--justeat" aria-hidden="true">J</span>Pedir en Just Eat</a></li>
+              <li><a class="app" data-enlace="telefono"><span class="app__marca" aria-hidden="true">☎</span>Para llevar: <span data-dato="telefono"></span></a></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== LLAMADA A RESERVAR ===================== -->
+    <section class="llamada">
+      <div class="llamada__fondo">
+        <img src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5747-1024x849.jpg" srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5747-768x637.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5747-1024x849.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5747-1536x1274.jpg 1536w" sizes="100vw" width="1024" height="849" alt="" loading="lazy" decoding="async" data-parallax>
+      </div>
+      <div class="contenedor llamada__contenido revelar">
+        <h2 class="llamada__titulo">El fin de semana se llena. <em>Reserva tu mesa.</em></h2>
+        <div class="llamada__acciones">
+          <a class="boton boton--rojo" href="reservas.html">Reservar mesa</a>
+          <p class="llamada__nota">O llámanos al <a data-enlace="telefono"><span data-dato="telefono"></span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VISÍTANOS ===================== -->
+    <section class="seccion visitanos" id="visitanos">
+      <div class="contenedor visitanos__rejilla">
+        <div class="visitanos__info revelar">
+          <h2 class="titulo-seccion">Horario y <em>ubicación</em></h2>
+          <p class="estado estado--grande"><span class="estado__punto" aria-hidden="true"></span><span class="estado__texto"></span></p>
+          <table class="tabla-horario"></table>
+          <p class="visitanos__cocina" data-dato="notaCocina"></p>
+
+          <div class="visitanos__bloques">
+            <div>
+              <h3>Dirección</h3>
+              <p><span data-dato="direccion"></span><br><span data-dato="ciudad"></span></p>
+              <a class="enlace-flecha" data-enlace="mapa" target="_blank" rel="noopener">Cómo llegar</a>
+            </div>
+            <div>
+              <h3>Reservas y contacto</h3>
+              <p>
+                <a data-enlace="telefono"><span data-dato="telefono"></span></a><br>
+                <a data-enlace="email"><span data-dato="email"></span></a>
+              </p>
+              <a class="enlace-flecha" data-enlace="resenasGoogle" target="_blank" rel="noopener">Ver reseñas en Google</a>
+            </div>
+          </div>
+
+          <h3>Servicios</h3>
+          <ul class="chips" id="servicios"></ul>
+        </div>
+
+        <!-- El mapa de Google solo se carga si el visitante lo pide o acepta sus cookies -->
+        <div class="visitanos__mapa revelar">
+          <div class="mapa-aviso" id="mapa-aviso">
+            <svg class="mapa-aviso__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <p>El mapa lo ofrece Google Maps, que puede instalar cookies.</p>
+            <button type="button" class="boton boton--contorno" id="cargar-mapa">Mostrar el mapa</button>
+            <a class="enlace-flecha" data-enlace="mapa" target="_blank" rel="noopener">Abrir en Google Maps</a>
+          </div>
+          <iframe id="mapa" title="Mapa con la ubicación de La Chulería" hidden referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor pie__rejilla">
+      <div>
+        <a class="logo logo--pie" href="index.html" aria-label="La Chulería, ir al inicio">
+          <span class="logo__circulo" aria-hidden="true"></span>
+          <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+        </a>
+        <p class="pie__lema"><span data-dato="direccion"></span>, <span data-dato="ciudad"></span>.</p>
+        <p class="pie__contacto">
+          <a data-enlace="telefono">Reservas: <span data-dato="telefono"></span></a>
+          <a data-enlace="email"><span data-dato="email"></span></a>
+        </p>
+      </div>
+      <nav class="pie__nav" aria-label="Pie de página">
+        <a href="carta.html">Carta</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="index.html#eventos">Eventos</a>
+        <a href="index.html#visitanos">Horario</a>
+        <a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a>
+        <a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a>
+        <a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a>
+        <a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+      <div class="pie__legal">
+        <p>© <span class="anio-actual">2026</span> La Chulería · Propuesta de diseño, no es la web oficial del restaurante.</p>
+        <nav class="pie__nav-legal" aria-label="Información legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <button type="button" data-abrir-cookies>Configurar cookies</button>
+        </nav>
+      </div>
+    </div>
+    <p class="pie__marca" aria-hidden="true">Chulería</p>
+  </footer>
+
+</body>
+</html>
