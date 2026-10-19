@@ -22,6 +22,11 @@ los buscadores tienen prohibido indexarla hasta que el restaurante la apruebe.
 
 ## Para enseñarla con un enlace (WhatsApp)
 
+Ya está publicada en `https://alejandromedranonavidades-netizen.github.io/la-chuleria/`. GitHub Pages la
+sirve desde la rama `gh-pages` del repositorio `la-chuleria`: cualquier cambio hay que subirlo a esa rama.
+
+Para hacerlo desde cero en otra cuenta:
+
 1. En github.com, crear un repositorio público llamado exactamente `la-chuleria`.
 2. "uploading an existing file": arrastrar todo lo que hay dentro de esta carpeta y pulsar "Commit changes".
 3. Settings → Pages → Branch `main`, carpeta `/ (root)` → Save.
