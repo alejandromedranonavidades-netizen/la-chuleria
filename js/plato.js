@@ -29,8 +29,6 @@ function pintarFicha() {
 
   const etiquetas = (plato.etiquetas || [])
     .map((e) => `<li class="etiqueta etiqueta--${e}">${ETIQUETAS[e]}</li>`).join("");
-  const marcos = ["marco--rojo", "marco--negro", "marco--verde"];
-  const color = marcos[PLATOS.indexOf(plato) % marcos.length];
 
   ficha.innerHTML = `
     <nav class="migas" aria-label="Estás en">
@@ -40,7 +38,7 @@ function pintarFicha() {
     </nav>
 
     <div class="ficha__rejilla">
-      <div class="ficha__foto">${marcoPlato(plato, `marco--ficha ${color}`, true)}</div>
+      <div class="ficha__foto">${marcoPlato(plato, "marco--ficha", true)}</div>
 
       <div class="ficha__texto">
         <p class="ficha__categoria">${TITULOS_CATEGORIA[plato.categoria]}</p>
@@ -65,7 +63,7 @@ function pintarFicha() {
 
         <div class="ficha__acciones">
           <a class="boton boton--rojo" href="reservas.html?plato=${plato.id}">Reservar mesa</a>
-          <a class="enlace-flecha" href="carta.html#${plato.categoria}">Volver a la carta</a>
+          <a class="enlace" href="carta.html#${plato.categoria}">Volver a la carta</a>
         </div>
       </div>
     </div>

@@ -128,7 +128,7 @@ function fotoPlato(plato, { sizes = "(max-width: 700px) 80vw, 380px", prioridad 
           </div>`;
 }
 
-// Foto con el marco de la casa: recuadro redondeado + azulejo de color desplazado detrás
+// Foto de la ficha de un plato dentro de su envoltorio (.marco)
 function marcoPlato(plato, clasesExtra = "", prioridad = false) {
   return `<figure class="marco ${clasesExtra}">
             ${fotoPlato(plato, { prioridad, transicion: true, sizes: "(max-width: 860px) 92vw, 46vw" })}
@@ -224,7 +224,7 @@ function rellenarDatos() {
 function pintarSellos() {
   const v = RESTAURANTE.valoracion;
   document.querySelectorAll(".sello").forEach((sello, i) => {
-    const vuelta = `${v.resenas} reseñas en Google · `.toUpperCase();
+    const vuelta = `${v.resenas} reseñas en Google  —  `.toUpperCase();
     sello.innerHTML = `
       <svg class="sello__anillo" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
         <defs><path id="sello-curva-${i}" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"/></defs>

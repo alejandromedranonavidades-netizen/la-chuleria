@@ -10,14 +10,10 @@ function pintarDestacados() {
   pista.innerHTML = destacados.map((p) => `
     <li class="carrusel__elemento">
       <a class="tarjeta-plato" href="plato.html?id=${p.id}">
-        ${fotoPlato(p, { transicion: true, sizes: "(max-width: 700px) 78vw, 400px" })}
-        <span class="tarjeta-plato__capa" aria-hidden="true"></span>
-        <span class="tarjeta-plato__arriba">
-          <span class="tarjeta-plato__categoria">${nombreCategoria(p.categoria)}</span>
-          <span class="tarjeta-plato__precio">${formatoPrecio(p.precio)}</span>
-        </span>
+        ${fotoPlato(p, { transicion: true, sizes: "(max-width: 700px) 72vw, 330px" })}
         <span class="tarjeta-plato__texto">
           <span class="tarjeta-plato__nombre">${p.nombre}</span>
+          <span class="tarjeta-plato__precio">${formatoPrecio(p.precio)}</span>
           <span class="tarjeta-plato__desc">${p.corta}</span>
         </span>
       </a>
@@ -26,7 +22,7 @@ function pintarDestacados() {
 
   // Botones anterior / siguiente
   const carrusel = pista.closest(".carrusel");
-  const paso = () => (pista.querySelector(".carrusel__elemento")?.offsetWidth || 300) + 28;
+  const paso = () => (pista.querySelector(".carrusel__elemento")?.offsetWidth || 300) + parseFloat(getComputedStyle(pista).columnGap || 24);
   document.querySelectorAll("[data-carrusel]").forEach((boton) => {
     boton.addEventListener("click", () => {
       carrusel.scrollBy({ left: boton.dataset.carrusel === "siguiente" ? paso() : -paso(), behavior: "smooth" });
@@ -59,20 +55,11 @@ function iniciarLocal() {
 }
 
 
-// Arroces de la casa (lista junto a la foto grande)
-function pintarArroces() {
-  const lista = document.getElementById("lista-arroces");
-  if (!lista) return;
-  lista.innerHTML = PLATOS.filter((p) => p.categoria === "arroces").map(filaCarta).join("");
-}
-
-
 // Pestañas con un adelanto de cada categoría de la carta
 function pintarPestanas() {
   const pestanas = document.getElementById("pestanas-carta");
   const panel = document.getElementById("panel-carta");
-  // En la portada, los arroces ya tienen su sección: aquí se enseña el resto
-  const categorias = CATEGORIAS.filter((c) => c.id !== "arroces");
+  const categorias = CATEGORIAS;
   const inicial = "picar"; // la pestaña abierta al llegar
 
   pestanas.innerHTML = categorias.map((c) => `
@@ -159,7 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
   prepararReservaRapida();
   pintarDestacados();
   iniciarLocal();
-  pintarArroces();
   pintarPestanas();
   pintarVisitanos();
   iniciarRevelado(); // para los elementos que acabamos de crear

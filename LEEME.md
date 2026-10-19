@@ -48,7 +48,7 @@ Para hacerlo desde cero en otra cuenta:
 
 ```
 la-chuleria/
-├── index.html        Inicio: portada, historia, el local (sala, comedor y barra), imprescindibles, arroces, carta, eventos, a domicilio, horario y mapa
+├── index.html        Inicio: portada, historia, el local (sala, comedor y barra), imprescindibles, carta, eventos, a domicilio, reserva, horario y mapa
 ├── carta.html        Carta completa con buscador, bodega y cervezas
 ├── plato.html        Ficha de cada plato (plato.html?id=bravas)
 ├── reservas.html     Formulario de reserva (modo demostración hasta conectar Formspree)
@@ -84,36 +84,37 @@ la-chuleria/
 | Antispam | Campo trampa, tiempo mínimo y límite de envíos en `reservas.js` |
 | Botón de WhatsApp | Preparado: aparece en cuanto se pone el número; mientras, botón de llamar |
 | Analítica | Google Analytics 4, solo con permiso: falta el ID |
-| Una sola llamada a la acción | "Reservar mesa" es el único botón rojo; lo demás son enlaces |
+| Una sola llamada a la acción | "Reservar mesa" es lo único en rojo; lo demás son enlaces o botones de contorno |
 
-## Diseño
+## Diseño (versión minimalista y formal)
 
-- **Colores del propio local**: verde botella (muebles), rojo (banquetas) y blanco azulejo (paredes),
-  con negro y marfil para darle un aire más elegante. Están en el apartado 1 de `css/estilos.css`.
-- **Fondos negros**: la cinta, la sección "El local", la tarjeta "A domicilio", el sello de Google,
-  la intro, la cabecera al bajar y el pie.
-- **Fuentes**: Cormorant Garamond (una serif clásica) para títulos, con su cursiva para la palabra
-  destacada de cada título, y Figtree para el texto.
+- **Idea**: la casa vista con calma. Mucho aire, poca cosa por pantalla, fotos grandes y la carta como
+  en papel (nombre, línea fina y precio).
+- **Colores de la casa**: blanco del azulejo de las paredes (fondo), verde botella de los muebles
+  (secciones oscuras y pie) y el rojo de las banquetas solo en "Reservar mesa". Están en el apartado 1
+  de `css/estilos.css`.
+- **Fuentes**: Ibarra Real Nova para títulos, nombres de platos y precios. Viene de los tipos de
+  Joaquín Ibarra, el impresor del Quijote de la Real Academia (1780). Figtree para el texto, los
+  horarios, los botones y los formularios.
+- **El círculo del logo** es el único adorno: el nombre en grande cruzando un círculo con la foto de la
+  sala (la parte de dentro se vuelve blanca), el sello de Google, los botones redondos, la foto de
+  "Reserva tu mesa", el botón de llamar, la vista previa de la carta y la 404.
 - **El local**: tres paneles con fotos de la sala, el comedor y la barra; el que señalas con el ratón se
   abre y enseña su texto. En el móvil van uno debajo de otro.
-- **El círculo del logo** se repite en la intro, el logo de la cabecera, el sello de Google, las fotos
-  redondas, la vista previa de la carta y la 404.
-- **Marco de las fotos**: recuadro redondeado con un azulejo de color desplazado detrás
-  (`.marco--rojo`, `.marco--negro`, `.marco--verde`, `.marco--crema`, `.marco--circulo`).
-- **Platos sin foto**: azulejo verde con el nombre del plato dentro del círculo.
+- **Bordes**: rectos (2 px de radio) en fotos, botones y campos; los formularios llevan solo una línea debajo.
+- **Platos sin foto**: fondo verde con el nombre del plato dentro del círculo.
 
 ## Animaciones
 
 - GSAP 3.13 (ScrollTrigger y SplitText) y Lenis 1.3 se cargan desde jsDelivr.
-- `js/animaciones.js` hace la intro (se dibuja el círculo del logo y sube el telón), la portada que se
-  ilumina con "chulería" entrando con rebote, el sello que llega girando, los títulos que salen del
-  desenfoque, la historia que se enciende al bajar, las fotos que se descubren con su azulejo, las fotos
-  redondas que caen girando, los paneles del local que se descubren uno tras otro, el carrusel que se desliza o se arrastra solo en su
-  zona, las pestañas con fondo que se desliza, la foto de "Reserva tu mesa" que se abre como una ventana,
-  las cifras que cuentan y el pie que sube. Con ratón: botones magnéticos, tarjetas que se inclinan,
-  burbuja "Ver plato" y foto redonda que sigue al ratón en la carta.
-- La cinta negra se mueve sola con CSS, siempre hacia el mismo lado.
-- Sin las librerías, o con "reducir movimiento" activado, la web funciona igual con animaciones sencillas.
+- Un solo momento grande al entrar: se dibuja el círculo, la foto de la sala se abre dentro y el
+  nombre sube letra a letra (las dos copias del nombre, la oscura y la blanca, se mueven a la vez).
+- Al bajar: la historia se enciende palabra a palabra, las fotos grandes tienen un parallax muy suave,
+  los paneles del local se descubren uno tras otro y la foto de "Reserva tu mesa" se abre desde un círculo.
+- Lo demás responde a lo que haces: el carrusel se desliza o se arrastra solo en su zona, la línea de
+  las pestañas de la carta se desliza, la burbuja "Ver plato" sigue al ratón y en la carta aparece la
+  foto del plato junto al ratón. Al abrir un plato, su foto viaja hasta la ficha.
+- Sin las librerías, o con "reducir movimiento" activado, la web se ve completa y sin animaciones.
 
 ## Para verla mientras editas
 

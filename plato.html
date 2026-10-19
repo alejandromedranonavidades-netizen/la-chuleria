@@ -29,14 +29,14 @@
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#17463B">
+  <meta name="theme-color" content="#EFF1EC">
 
   <!-- Velocidad: conexión anticipada con los servidores de fuentes, fotos y librerías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://lachuleria.es">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,500;0,600;1,400&amp;family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/estilos.css">
 
   <script src="js/datos.js" defer></script>
@@ -59,12 +59,12 @@
     <div class="contenedor cabecera__fila">
       <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
         <span class="logo__circulo" aria-hidden="true"></span>
-        <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+        <span class="logo__nombre">La Chulería</span>
       </a>
 
       <nav class="nav" aria-label="Principal">
-        <a href="index.html">Inicio</a>
         <a href="carta.html">Carta</a>
+        <a href="index.html#local">El local</a>
         <a href="index.html#eventos">Eventos</a>
         <a href="index.html#visitanos">Horario y ubicación</a>
         <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
@@ -82,7 +82,7 @@
 
     <section class="seccion relacionados" id="relacionados" hidden>
       <div class="contenedor">
-        <h2 class="titulo-seccion">También de esta <em>sección</em></h2>
+        <h2 class="titulo">Más de esta sección</h2>
         <ul class="lista-carta" id="lista-relacionados"></ul>
       </div>
     </section>
@@ -90,31 +90,49 @@
 
   <!-- ===================== PIE ===================== -->
   <footer class="pie">
-    <div class="contenedor pie__rejilla">
-      <div>
+    <div class="contenedor">
+      <div class="pie__cabeza">
         <a class="logo logo--pie" href="index.html" aria-label="La Chulería, ir al inicio">
           <span class="logo__circulo" aria-hidden="true"></span>
-          <span class="logo__texto"><span class="logo__nombre">La Chulería</span><span class="logo__sub">Bar &amp; restaurante</span></span>
+          <span class="logo__nombre">La Chulería</span>
         </a>
-        <p class="pie__lema"><span data-dato="direccion"></span>, <span data-dato="ciudad"></span>.</p>
-        <p class="pie__contacto">
-          <a data-enlace="telefono">Reservas: <span data-dato="telefono"></span></a>
-          <a data-enlace="email"><span data-dato="email"></span></a>
-        </p>
+        <p class="pie__lema">Bar y restaurante en Valdemoro.</p>
       </div>
-      <nav class="pie__nav" aria-label="Pie de página">
-        <a href="carta.html">Carta</a>
-        <a href="reservas.html">Reservas</a>
-        <a href="index.html#eventos">Eventos</a>
-        <a href="index.html#visitanos">Horario</a>
-        <a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a>
-        <a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a>
-        <a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a>
-        <a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a>
-        <a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a>
-      </nav>
+
+      <div class="pie__rejilla">
+        <div>
+          <h2 class="pie__titulo">Dónde estamos</h2>
+          <p><span data-dato="direccion"></span><br><span data-dato="ciudad"></span></p>
+          <a data-enlace="mapa" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+        <div>
+          <h2 class="pie__titulo">Reservas</h2>
+          <p><a data-enlace="telefono"><span data-dato="telefono"></span></a><br>
+             <a data-enlace="email"><span data-dato="email"></span></a></p>
+        </div>
+        <nav aria-label="La casa">
+          <h2 class="pie__titulo">La casa</h2>
+          <ul class="pie__lista">
+            <li><a href="carta.html">Carta</a></li>
+            <li><a href="reservas.html">Reservar mesa</a></li>
+            <li><a href="index.html#eventos">Eventos</a></li>
+            <li><a href="index.html#visitanos">Horario</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="También en">
+          <h2 class="pie__titulo">También en</h2>
+          <ul class="pie__lista">
+            <li><a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a></li>
+            <li><a data-enlace="justEat" target="_blank" rel="noopener">Just Eat</a></li>
+            <li><a data-enlace="fichaGoogle" target="_blank" rel="noopener">Google</a></li>
+            <li><a data-enlace="instagram" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a data-enlace="facebook" target="_blank" rel="noopener">Facebook</a></li>
+          </ul>
+        </nav>
+      </div>
+
       <div class="pie__legal">
-        <p>© <span class="anio-actual">2026</span> La Chulería · Propuesta de diseño, no es la web oficial del restaurante.</p>
+        <p>© <span class="anio-actual">2026</span> La Chulería. Propuesta de diseño, no es la web oficial del restaurante.</p>
         <nav class="pie__nav-legal" aria-label="Información legal">
           <a href="aviso-legal.html">Aviso legal</a>
           <a href="privacidad.html">Privacidad</a>
@@ -123,7 +141,6 @@
         </nav>
       </div>
     </div>
-    <p class="pie__marca" aria-hidden="true">Chulería</p>
   </footer>
 
 </body>
