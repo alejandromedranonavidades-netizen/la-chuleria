@@ -1,26 +1,22 @@
 /* =============================================================
-   ANIMACIONES.JS — Animaciones con GSAP y scroll suave con Lenis
+   ANIMACIONES.JS — Animaciones con GSAP
    -------------------------------------------------------------
    Librerías (se cargan desde jsDelivr en el <head> de cada página):
    - GSAP + ScrollTrigger + SplitText  https://gsap.com
-   - Lenis (scroll suave)              https://lenis.darkroom.engineering
 
    La idea del movimiento en esta versión es "poco, pero bien hecho".
+   El scroll es el normal del navegador: nada va atado a él ni lo frena.
    Hay un solo momento grande al entrar y el resto responde a lo que
    hace el visitante:
    1.  Portada: se dibuja el círculo del logo, la foto de la sala se abre
        dentro y el nombre sube letra a letra (al cruzar el círculo
        se vuelve blanco)
    2.  Páginas interiores: el título sube palabra a palabra
-   3.  Scroll suave (Lenis) y enlaces internos que se deslizan
-   4.  La historia se enciende palabra a palabra al bajar
-   5.  Fotos grandes con un parallax muy suave
-   6.  El local: los tres paneles se descubren uno tras otro
-   7.  Los imprescindibles: carrusel que se desliza o se arrastra en horizontal,
+   3.  El local: los tres paneles se descubren uno tras otro al llegar
+   4.  Los imprescindibles: carrusel que se desliza o se arrastra en horizontal,
        solo en su zona (bajar por la página no lo mueve)
-   8.  Carta del inicio: una línea fina se desliza a la pestaña elegida
-   9.  Reserva: la foto empieza dentro de un círculo y se abre al bajar
-   10. Ratón: burbuja "Ver plato" y foto redonda que sigue al ratón en la carta
+   5.  Reserva: al llegar, la foto se abre desde un círculo (una sola vez)
+   6.  Ratón: burbuja "Ver plato" y foto redonda que sigue al ratón en la carta
 
    Si las librerías no cargan o el visitante prefiere menos movimiento,
    la web se ve completa y sin animaciones.
@@ -42,13 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.SplitText) gsap.registerPlugin(SplitText);
   gsap.defaults({ ease: "power3.out" });
 
-  const lenis = iniciarScrollSuave();
   if (!animarPortada()) animarCabezaInterior();
-  animarEntradilla();
-  animarParallax();
   animarLocal();
   animarDestacados();
-  animarPestanas();
   animarReserva();
   if (PUNTERO_FINO) {
     burbujaVerPlato();
@@ -58,11 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Recalcula posiciones cuando terminan de cargar fuentes y fotos
   window.addEventListener("load", () => ScrollTrigger.refresh());
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
-  document.addEventListener("click", (e) => {
-    if (e.target.closest(".pestana")) setTimeout(() => ScrollTrigger.refresh(), 80);
-  });
-
-  window.lenis = lenis; // por si hace falta desde la consola
 });
 
 
@@ -77,7 +64,7 @@ function animarPortada() {
   const sello = portada.querySelector(".portada__sello");
   const pie = portada.querySelectorAll(".portada__pie > *");
   const cabecera = window.matchMedia("(min-width: 861px)").matches
-    ? document.querySelectorAll(".cabecera .logo, .cabecera .nav > *")
+    ? document.querySelectorAll(".cabecera .logo, .cabecera .nav__item, .cabecera .nav__reservar")
     : document.querySelectorAll(".cabecera .logo, .cabecera__boton-menu");
 
   // Las dos copias del nombre (la oscura y la blanca de dentro del círculo)
@@ -103,15 +90,6 @@ function animarPortada() {
   if (sello) tl.from(sello, { autoAlpha: 0, rotation: -60, duration: 1.4 }, 1.4);
   tl.from(pie, { autoAlpha: 0, y: 14, duration: 1, stagger: 0.08 }, 1.45);
   tl.from(cabecera, { autoAlpha: 0, y: -10, duration: 0.9, stagger: 0.05, clearProps: "all" }, 1.3);
-
-  // Al bajar, la foto se mueve un poco más despacio dentro del círculo
-  if (foto) {
-    gsap.to(portada.querySelector(".portada__foto"), {
-      yPercent: 12,
-      ease: "none",
-      scrollTrigger: { trigger: portada, start: "top top", end: "bottom top", scrub: true }
-    });
-  }
   return true;
 }
 
@@ -131,74 +109,7 @@ function animarCabezaInterior() {
 }
 
 
-/* ---------- 3. Lenis: scroll suave ---------- */
-function iniciarScrollSuave() {
-  if (!window.Lenis) return null;
-
-  const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((tiempo) => lenis.raf(tiempo * 1000));
-  gsap.ticker.lagSmoothing(0);
-
-  // Enlaces a secciones de la misma página (#visitanos, categorías de la carta...)
-  document.addEventListener("click", (e) => {
-    const enlace = e.target.closest("a[href*='#']");
-    if (!enlace) return;
-    const url = new URL(enlace.href, location.href);
-    const ruta = (p) => p.replace(/index\.html$/, "");
-    if (ruta(url.pathname) !== ruta(location.pathname) || !url.hash) return;
-    const destino = document.getElementById(decodeURIComponent(url.hash.slice(1)));
-    if (!destino) return;
-    e.preventDefault();
-    lenis.scrollTo(destino, { offset: -margenSuperior(), duration: 1.4 });
-    history.pushState(null, "", url.hash);
-  });
-
-  // Con el menú del móvil abierto, el fondo no se mueve
-  new MutationObserver(() => {
-    document.body.classList.contains("sin-scroll") ? lenis.stop() : lenis.start();
-  }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
-
-  return lenis;
-}
-
-// Altura de lo que queda fijo arriba (cabecera y barra de categorías de la carta)
-function margenSuperior() {
-  const cabecera = document.querySelector(".cabecera");
-  const cartaNav = document.querySelector(".carta-nav");
-  return (cabecera ? cabecera.offsetHeight : 0) + (cartaNav ? cartaNav.offsetHeight : 0) + 16;
-}
-
-
-/* ---------- 4. La historia se enciende palabra a palabra al bajar ---------- */
-function animarEntradilla() {
-  if (!window.SplitText) return;
-  document.querySelectorAll(".historia .entradilla").forEach((parrafo) => {
-    const palabras = SplitText.create(parrafo, { type: "words" }).words;
-    gsap.fromTo(palabras, { opacity: 0.18 }, {
-      opacity: 1,
-      ease: "none",
-      stagger: 0.1,
-      scrollTrigger: { trigger: parrafo, start: "top 85%", end: "bottom 50%", scrub: true }
-    });
-  });
-}
-
-
-/* ---------- 5. Parallax muy suave en las fotos grandes ---------- */
-function animarParallax() {
-  document.querySelectorAll("[data-parallax]").forEach((img) => {
-    gsap.fromTo(img, { yPercent: -5, scale: 1.12 }, {
-      yPercent: 5,
-      scale: 1.12,
-      ease: "none",
-      scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true }
-    });
-  });
-}
-
-
-/* ---------- 6. El local: los paneles se descubren de abajo arriba, uno tras otro ----------
+/* ---------- 3. El local: los paneles se descubren de abajo arriba, uno tras otro ----------
    Al terminar se quitan los estilos de GSAP para que el panel vuelva a abrirse con CSS. */
 function animarLocal() {
   const paneles = gsap.utils.toArray(".local .panel");
@@ -215,7 +126,7 @@ function animarLocal() {
 }
 
 
-/* ---------- 7. Los imprescindibles ----------
+/* ---------- 4. Los imprescindibles ----------
    El carrusel se mueve en horizontal solo en su zona: deslizando con el
    panel táctil o el dedo, arrastrando con el ratón o con las flechas. */
 function animarDestacados() {
@@ -271,7 +182,6 @@ function deslizarConRueda(carrusel) {
   carrusel.addEventListener("wheel", (e) => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
-    e.stopPropagation(); // que no lo coja el scroll suave de la página
     const maximo = carrusel.scrollWidth - carrusel.clientWidth;
     if (objetivo === null) objetivo = carrusel.scrollLeft;
     objetivo = gsap.utils.clamp(0, maximo, objetivo + e.deltaX * (e.deltaMode === 1 ? 40 : 1));
@@ -329,38 +239,7 @@ function arrastrarConRaton(carrusel) {
 }
 
 
-/* ---------- 8. Carta del inicio: la línea fina se desliza a la pestaña elegida ---------- */
-function animarPestanas() {
-  const pestanas = document.getElementById("pestanas-carta");
-  const panel = document.getElementById("panel-carta");
-  if (!pestanas || !panel) return;
-
-  const indicador = document.createElement("span");
-  indicador.className = "pestanas__indicador";
-  indicador.setAttribute("aria-hidden", "true");
-  pestanas.append(indicador);
-  RAIZ.classList.add("con-indicador");
-
-  const activa = () => pestanas.querySelector('[aria-selected="true"]');
-  const colocar = (boton, animar) => {
-    if (!boton) return;
-    const medidas = { x: boton.offsetLeft, width: boton.offsetWidth };
-    animar ? gsap.to(indicador, { ...medidas, duration: 0.6, ease: "expo.out" }) : gsap.set(indicador, medidas);
-  };
-
-  colocar(activa(), false);
-  // inicio.js ya ha cambiado el contenido cuando llega este clic: los platos aparecen con un fundido corto
-  pestanas.addEventListener("click", (e) => {
-    if (!e.target.closest(".pestana")) return;
-    colocar(activa(), true);
-    gsap.fromTo(panel.querySelectorAll(".lista-carta > li"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, stagger: 0.04, overwrite: true });
-  });
-  window.addEventListener("resize", () => colocar(activa(), false));
-  if (document.fonts) document.fonts.ready.then(() => colocar(activa(), false));
-}
-
-
-/* ---------- 9. Reserva: la foto empieza dentro de un círculo y se abre al bajar ---------- */
+/* ---------- 5. Reserva: al llegar, la foto se abre desde un círculo (una sola vez, sin ir atada al scroll) ---------- */
 function animarReserva() {
   const reserva = document.querySelector(".reserva");
   const fondo = reserva && reserva.querySelector(".reserva__fondo");
@@ -368,13 +247,15 @@ function animarReserva() {
   const inicio = window.innerWidth < 700 ? 30 : 17;
   gsap.fromTo(fondo, { clipPath: `circle(${inicio}% at 50% 50%)` }, {
     clipPath: "circle(75% at 50% 50%)",
-    ease: "none",
-    scrollTrigger: { trigger: reserva, start: "top 85%", end: "center 55%", scrub: true }
+    duration: 1.8,
+    ease: "expo.inOut",
+    clearProps: "clipPath",
+    scrollTrigger: { trigger: reserva, start: "top 60%", once: true }
   });
 }
 
 
-/* ---------- 10. Interacciones con ratón ---------- */
+/* ---------- 6. Interacciones con ratón ---------- */
 
 /* Dónde está el ratón. Se comprueba al moverlo y también al hacer scroll,
    porque al bajar la página los platos pasan por debajo de un ratón quieto

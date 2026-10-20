@@ -2,7 +2,7 @@
    MAIN.JS — Funciones comunes a todas las páginas
    - Rellena los datos del restaurante (teléfono, dirección...)
    - Fotos con varios tamaños
-   - Menú de navegación en móvil y cabecera que se esconde
+   - Menú con submenús desplegables (y acordeón en el móvil)
    - Estado "Abierto ahora / Cerrado" y tabla de horario
    - Botón flotante (WhatsApp o llamar) y barra del móvil
    ============================================================= */
@@ -171,7 +171,8 @@ document.addEventListener("error", (e) => {
 
 // Fotos que ya fallaron antes de que este archivo se cargara
 function revisarFotos() {
-  document.querySelectorAll(".foto img").forEach((img) => {
+  // (las fotos de los submenús aún no tienen src: se cargan al abrirlos)
+  document.querySelectorAll(".foto img:not([data-src])").forEach((img) => {
     if (img.complete && img.naturalWidth === 0) fotoFallida(img);
   });
 }
@@ -292,46 +293,141 @@ function pintarHorario() {
 }
 
 
-/* ---------- Cabecera y menú móvil ---------- */
+/* ---------- Cabecera, menú móvil y submenús ---------- */
 function iniciarCabecera() {
   const cabecera = document.querySelector(".cabecera");
   const boton = document.querySelector(".cabecera__boton-menu");
   if (!cabecera) return;
 
-  // Al bajar se vuelve sólida y se esconde; al subir, reaparece
-  let ultimaY = window.scrollY;
-  const alHacerScroll = () => {
-    const y = window.scrollY;
-    cabecera.classList.toggle("cabecera--compacta", y > 40);
-    const bajando = y > ultimaY && y > 320 && !cabecera.classList.contains("menu-abierto");
-    cabecera.classList.toggle("cabecera--oculta", bajando);
-    ultimaY = y;
-  };
+  // Al bajar, una línea fina la separa del contenido (la cabecera no se esconde)
+  const alHacerScroll = () => cabecera.classList.toggle("cabecera--compacta", window.scrollY > 10);
   alHacerScroll();
   window.addEventListener("scroll", alHacerScroll, { passive: true });
 
-  // Abrir / cerrar menú en móvil
+  const submenus = iniciarSubmenus(cabecera);
+
+  // Abrir / cerrar el menú en el móvil
+  const cerrarMenu = () => {
+    cabecera.classList.remove("menu-abierto");
+    document.body.classList.remove("sin-scroll");
+    if (boton) {
+      boton.setAttribute("aria-expanded", false);
+      boton.setAttribute("aria-label", "Abrir menú");
+    }
+    submenus.cerrar();
+  };
   if (boton) {
     boton.addEventListener("click", () => {
-      const abierto = cabecera.classList.toggle("menu-abierto");
-      boton.setAttribute("aria-expanded", abierto);
-      boton.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
-      document.body.classList.toggle("sin-scroll", abierto);
+      if (cabecera.classList.contains("menu-abierto")) return cerrarMenu();
+      cabecera.classList.add("menu-abierto");
+      document.body.classList.add("sin-scroll");
+      boton.setAttribute("aria-expanded", true);
+      boton.setAttribute("aria-label", "Cerrar menú");
     });
-    cabecera.querySelectorAll(".nav a").forEach((a) =>
-      a.addEventListener("click", () => {
-        cabecera.classList.remove("menu-abierto");
-        boton.setAttribute("aria-expanded", false);
-        document.body.classList.remove("sin-scroll");
-      })
-    );
   }
+  // Al elegir un enlace del menú, el menú se cierra
+  cabecera.querySelectorAll(".nav a").forEach((a) => a.addEventListener("click", cerrarMenu));
 
-  // Marca el enlace de la página actual
+  // En la carta, el apartado "Carta" queda marcado
   const pagina = location.pathname.split("/").pop() || "index.html";
-  cabecera.querySelectorAll(".nav a").forEach((a) => {
-    if (a.getAttribute("href") === pagina) a.setAttribute("aria-current", "page");
+  const botonCarta = cabecera.querySelector('[aria-controls="sub-carta"]');
+  if (botonCarta) botonCarta.classList.toggle("es-actual", pagina === "carta.html" || pagina === "plato.html");
+}
+
+/* Submenús: con ratón se abren al pasar por encima (y con clic); en pantallas táctiles
+   y con teclado, al pulsar. Solo hay uno abierto a la vez. Escape o pulsar fuera los cierra. */
+function iniciarSubmenus(cabecera) {
+  const botones = [...cabecera.querySelectorAll(".nav__boton")];
+  const escritorio = window.matchMedia("(min-width: 861px)");
+  let abierto = null;
+  let abiertoA = 0;
+  let espera;
+
+  const panel = (b) => document.getElementById(b.getAttribute("aria-controls"));
+  const cerrar = (devolverFoco = false) => {
+    clearTimeout(espera);
+    if (!abierto) return;
+    const b = abierto;
+    b.setAttribute("aria-expanded", "false");
+    panel(b).classList.remove("abierto");
+    cabecera.classList.remove("con-submenu");
+    abierto = null;
+    if (devolverFoco) b.focus();
+  };
+  const abrir = (b) => {
+    if (abierto === b) return;
+    cerrar();
+    const p = panel(b);
+    // Las fotos del submenú se descargan la primera vez que se abre
+    p.querySelectorAll("img[data-src]").forEach((img) => {
+      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+      img.src = img.dataset.src;
+      img.removeAttribute("data-src");
+    });
+    b.setAttribute("aria-expanded", "true");
+    p.classList.add("abierto");
+    if (escritorio.matches) cabecera.classList.add("con-submenu");
+    abierto = b;
+    abiertoA = Date.now();
+  };
+
+  botones.forEach((b) => {
+    b.addEventListener("click", () => {
+      // Si se acaba de abrir al pasar el ratón, el clic no lo cierra
+      if (abierto === b && Date.now() - abiertoA > 500) cerrar();
+      else abrir(b);
+    });
+    const item = b.closest(".nav__item");
+    item.addEventListener("pointerenter", (e) => {
+      if (e.pointerType !== "mouse" || !escritorio.matches) return;
+      clearTimeout(espera);
+      espera = setTimeout(() => abrir(b), abierto ? 0 : 140);
+    });
+    item.addEventListener("pointerleave", (e) => {
+      if (e.pointerType !== "mouse" || !escritorio.matches) return;
+      clearTimeout(espera);
+      espera = setTimeout(() => { if (abierto === b) cerrar(); }, 260);
+    });
   });
+
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && abierto) cerrar(true); });
+  document.addEventListener("click", (e) => {
+    if (abierto && escritorio.matches && !e.target.closest(".nav__item")) cerrar();
+  });
+  // Un enlace a la misma página (#local) también cierra el submenú
+  cabecera.querySelectorAll(".submenu a").forEach((a) => a.addEventListener("click", () => cerrar()));
+  escritorio.addEventListener("change", () => cerrar());
+  return { cerrar };
+}
+
+/* Contenido de los submenús que sale de datos.js */
+function pintarSubmenus() {
+  // Secciones de la carta, con el número de platos
+  document.querySelectorAll("[data-categorias]").forEach((lista) => {
+    const secciones = CATEGORIAS.map((c) => ({
+      id: c.id,
+      nombre: TITULOS_CATEGORIA[c.id] || c.nombre,
+      cuantos: PLATOS.filter((p) => p.categoria === c.id).length
+    }));
+    secciones.push({ id: "bebidas", nombre: "Bodega y cervezas", cuantos: BEBIDAS.reduce((n, g) => n + g.lista.length, 0) });
+    lista.innerHTML = secciones.map((c) =>
+      `<li><a href="carta.html#${c.id}">${c.nombre} <small>${c.cuantos}</small></a></li>`).join("");
+  });
+
+  // Horario resumido: los días seguidos con el mismo horario van juntos
+  const grupos = [];
+  ORDEN_SEMANA.forEach((d) => {
+    const turnos = RESTAURANTE.horario[d];
+    const texto = turnos.length ? turnos.map(([a, c]) => `<span class="turno">${a} – ${aHora(aMinutos(c))}</span>`).join(" y ") : "Cerrado";
+    const ultimo = grupos[grupos.length - 1];
+    if (ultimo && ultimo.texto === texto) ultimo.hasta = d;
+    else grupos.push({ desde: d, hasta: d, texto });
+  });
+  const html = grupos.map((g) => {
+    const dias = g.desde === g.hasta ? DIAS[g.desde] : `${DIAS[g.desde]} a ${DIAS[g.hasta].toLowerCase()}`;
+    return `<dt>${dias}</dt><dd${g.texto === "Cerrado" ? ' class="cerrado"' : ""}>${g.texto}</dd>`;
+  }).join("");
+  document.querySelectorAll("[data-horario-corto]").forEach((dl) => { dl.innerHTML = html; });
 }
 
 
@@ -403,6 +499,7 @@ function iniciarEventos() {
 
 /* ---------- Arranque ---------- */
 document.addEventListener("DOMContentLoaded", () => {
+  pintarSubmenus();
   rellenarDatos();
   pintarSellos();
   revisarFotos();

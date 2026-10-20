@@ -48,7 +48,7 @@ Para hacerlo desde cero en otra cuenta:
 
 ```
 la-chuleria/
-├── index.html        Inicio: portada, historia, el local (sala, comedor y barra), imprescindibles, carta, eventos, a domicilio, reserva, horario y mapa
+├── index.html        Inicio: portada, historia, el local, imprescindibles, reserva, horario y mapa
 ├── carta.html        Carta completa con buscador, bodega y cervezas
 ├── plato.html        Ficha de cada plato (plato.html?id=bravas)
 ├── reservas.html     Formulario de reserva (modo demostración hasta conectar Formspree)
@@ -56,10 +56,10 @@ la-chuleria/
 ├── sitemap.xml  robots.txt  site.webmanifest  favicon.ico
 ├── css/estilos.css   Todo el diseño. Colores y fuentes al principio
 ├── js/datos.js       TODOS LOS DATOS: horario, teléfono, carta, bebidas, fotos, datos legales
-├── js/main.js        Común: datos, fotos, horario, abierto/cerrado, sello de Google, botón de llamar
+├── js/main.js        Común: menú y submenús, datos, fotos, horario, abierto/cerrado, sello de Google, botón de llamar
 ├── js/cookies.js     Aviso de cookies, Google Analytics y mapa (solo con permiso)
 ├── js/inicio.js  carta.js  plato.js  reservas.js   Cada página
-├── js/animaciones.js Animaciones con GSAP y scroll suave con Lenis
+├── js/animaciones.js Animaciones con GSAP
 └── img/              Iconos e imagen para compartir
 ```
 
@@ -99,6 +99,13 @@ la-chuleria/
 - **El círculo del logo** es el único adorno: el nombre en grande cruzando un círculo con la foto de la
   sala (la parte de dentro se vuelve blanca), el sello de Google, los botones redondos, la foto de
   "Reserva tu mesa", el botón de llamar, la vista previa de la carta y la 404.
+- **Menú con submenús**: Carta, El local, Eventos y Horario y ubicación despliegan su información debajo
+  de la cabecera, sin salir de la página (la carta por secciones, las fotos del local, los menús para
+  celebraciones y pedidos a domicilio, y el horario con la dirección). Con ratón se abren al pasar por
+  encima; con el dedo o el teclado, al pulsar. Escape o pulsar fuera los cierra. En el móvil, el menú
+  ocupa la pantalla y cada apartado se abre como un acordeón. La cabecera no se esconde al bajar.
+- **Portada corta**: la carta por pestañas y la sección de eventos ya están en el menú; el horario va
+  resumido (los días con el mismo horario, juntos). La página es un tercio más corta.
 - **El local**: tres paneles con fotos de la sala, el comedor y la barra; el que señalas con el ratón se
   abre y enseña su texto. En el móvil van uno debajo de otro.
 - **Bordes**: rectos (2 px de radio) en fotos, botones y campos; los formularios llevan solo una línea debajo.
@@ -106,14 +113,15 @@ la-chuleria/
 
 ## Animaciones
 
-- GSAP 3.13 (ScrollTrigger y SplitText) y Lenis 1.3 se cargan desde jsDelivr.
+- GSAP 3.13 (ScrollTrigger y SplitText) se carga desde jsDelivr. El scroll es el normal del navegador: nada lo
+  frena ni va atado a él.
 - Un solo momento grande al entrar: se dibuja el círculo, la foto de la sala se abre dentro y el
   nombre sube letra a letra (las dos copias del nombre, la oscura y la blanca, se mueven a la vez).
-- Al bajar: la historia se enciende palabra a palabra, las fotos grandes tienen un parallax muy suave,
-  los paneles del local se descubren uno tras otro y la foto de "Reserva tu mesa" se abre desde un círculo.
-- Lo demás responde a lo que haces: el carrusel se desliza o se arrastra solo en su zona, la línea de
-  las pestañas de la carta se desliza, la burbuja "Ver plato" sigue al ratón y en la carta aparece la
-  foto del plato junto al ratón. Al abrir un plato, su foto viaja hasta la ficha.
+- Al llegar a ellos (una sola vez): los paneles del local se descubren uno tras otro y la foto de
+  "Reserva tu mesa" se abre desde un círculo.
+- Lo demás responde a lo que haces: los submenús bajan de la cabecera, el carrusel se desliza o se
+  arrastra solo en su zona, la burbuja "Ver plato" sigue al ratón y en la carta aparece la foto del plato
+  junto al ratón. Al abrir un plato, su foto viaja hasta la ficha.
 - Sin las librerías, o con "reducir movimiento" activado, la web se ve completa y sin animaciones.
 
 ## Para verla mientras editas

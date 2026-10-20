@@ -15,14 +15,14 @@
    2.  Base
    3.  Botones y enlaces
    4.  Fotos, sello y etiquetas
-   5.  Cabecera, logo y navegación
+   5.  Cabecera, logo, menú y submenús desplegables
    6.  Portada
    7.  Secciones comunes
    8.  Historia
    9.  El local
    10. Los imprescindibles (carrusel)
-   11. Carta (pestañas, filas, carta completa, bebidas)
-   12. Eventos y a domicilio
+   11. Carta (filas, carta completa, bebidas)
+   12. Horario resumido (submenú y pie)
    13. Reserva (la foto que se abre desde un círculo)
    14. Horario y ubicación
    15. Cabecera de páginas interiores
@@ -34,7 +34,7 @@
    21. Páginas legales y 404
    22. Burbuja "Ver plato" y vista previa de la carta
    23. Adaptación a tablet y móvil
-   24. GSAP y Lenis
+   24. GSAP
    25. Menos movimiento
    ============================================================= */
 
@@ -298,10 +298,9 @@ figure { margin: 0; }
   inset: 0 0 auto;
   z-index: 50;
   background: var(--cal);
-  transition: box-shadow 0.4s, transform 0.5s var(--curva);
+  transition: box-shadow 0.4s;
 }
 .cabecera--compacta { box-shadow: 0 1px 0 var(--linea); }
-.cabecera--oculta { transform: translateY(-101%); }
 
 .cabecera__fila {
   display: flex;
@@ -333,28 +332,108 @@ figure { margin: 0; }
 .logo__nombre { position: relative; padding-left: 8px; font: 400 1.6rem/1 var(--serif); letter-spacing: -0.01em; }
 
 .nav { display: flex; align-items: center; gap: clamp(1.25rem, 2.6vw, 2.4rem); }
-.nav a:not(.boton) {
+.nav__lista { display: flex; align-items: center; gap: clamp(1.1rem, 2.3vw, 2.2rem); margin: 0; padding: 0; list-style: none; }
+.nav__item { position: static; }   /* el submenú se coloca respecto a la cabecera, a todo lo ancho */
+.nav__boton {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
   padding: 0.4rem 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: 500 0.95rem var(--sans);
+  cursor: pointer;
 }
-.nav a:not(.boton)::after {
+.nav__boton::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 8px;
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.5s var(--curva);
 }
-.nav a:not(.boton):hover::after,
-.nav a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+.nav__boton:hover::after,
+.nav__boton.es-actual::after,
+.nav__boton[aria-expanded="true"]::after { transform: scaleX(1); transform-origin: left; }
+.nav__flecha { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 1.4; transition: transform 0.4s var(--curva); }
+.nav__boton[aria-expanded="true"] .nav__flecha { transform: rotate(180deg); }
 .nav__reservar { min-height: 42px; padding: 0.6rem 1.15rem; }
+
+/* Submenú desplegable: baja desde la cabecera, a todo lo ancho */
+.submenu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--linea);
+  background: var(--cal);
+  box-shadow: 0 30px 50px -40px rgba(15, 46, 39, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.25s, transform 0.4s var(--curva), visibility 0s 0.4s;
+}
+.submenu.abierto { visibility: visible; opacity: 1; transform: none; transition: opacity 0.3s, transform 0.5s var(--curva), visibility 0s; }
+/* Velo sobre la página mientras hay un submenú abierto (al pulsarlo, se cierra) */
+.cabecera.con-submenu::before {
+  content: "";
+  position: fixed;
+  inset: var(--altura-cabecera) 0 0;
+  background: rgba(27, 33, 30, 0.16);
+}
+.submenu__fila {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(16px, 2.5vw, 32px);
+  align-items: start;
+}
+.submenu__principal { grid-column: 1 / span 7; }
+.submenu__lado { grid-column: 9 / -1; color: var(--tinta-suave); }
+.submenu__lado p { margin-bottom: 1.25rem; }
+.submenu__titulo { margin: 0 0 1.25rem; font: 400 var(--t-grande)/1.15 var(--serif); color: var(--tinta); }
+.submenu__subtitulo { margin: 0 0 0.75rem !important; font: 600 var(--t-pequena) var(--sans); letter-spacing: 0.02em; color: var(--tinta); }
+.submenu__texto { max-width: 46ch; color: var(--tinta-suave); }
+.submenu__nota { margin: 0.9rem 0 0; font-size: var(--t-pequena); color: var(--tinta-suave); }
+.submenu__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; margin: 1.25rem 0 0; }
+.submenu .estado { margin-bottom: 0.9rem; color: var(--tinta); }
+
+/* Carta: las secciones en dos columnas */
+.submenu__categorias { columns: 2; column-gap: clamp(2rem, 5vw, 4rem); margin: 0; padding: 0; list-style: none; }
+.submenu__categorias li { break-inside: avoid; }
+.submenu__categorias a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--linea);
+  font: 400 1.2rem/1.3 var(--serif);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.submenu__categorias a:hover { color: var(--verde); }
+.submenu__categorias small { font: 400 var(--t-pequena) var(--sans); color: var(--tinta-suave); }
+
+/* El local: tres fotos con su nombre */
+.submenu__principal:only-child { grid-column: 1 / -1; }
+.submenu__sitios { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.5vw, 32px); margin: 0; padding: 0; list-style: none; }
+.submenu__sitio { display: block; text-decoration: none; }
+.submenu__sitio .foto { display: block; aspect-ratio: 16 / 10; }
+.submenu__sitio:hover .foto img { transform: scale(1.04); }
+.submenu__sitio-nombre { display: block; margin-top: 0.8rem; font: 400 1.3rem/1.2 var(--serif); }
+.submenu__sitio-texto { display: block; margin-top: 0.2rem; font-size: var(--t-pequena); color: var(--tinta-suave); }
+
+/* Eventos: pedir a domicilio */
+.submenu__enlaces { display: grid; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+.submenu__enlaces a { font-weight: 600; color: var(--tinta); text-underline-offset: 0.3em; }
+.submenu__enlaces a:hover { color: var(--verde); }
 
 .cabecera__boton-menu {
   display: none;
@@ -490,18 +569,15 @@ figure { margin: 0; }
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: clamp(16px, 2.5vw, 32px);
-  row-gap: clamp(3.5rem, 8vw, 7rem);
-  align-items: start;
+  row-gap: 2.5rem;
+  align-items: center;
 }
-.historia__titulo { grid-column: 1 / span 5; }
-.historia__texto { grid-column: 7 / -1; }
+.historia__texto { grid-column: 1 / span 6; }
+.historia__titulo { margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
 .historia__texto p:not(.entradilla) { max-width: 56ch; color: var(--tinta-suave); }
-.historia__foto--alta { grid-column: 1 / span 5; }
-.historia__foto--alta .foto { aspect-ratio: 4 / 5; }
-.historia__foto--ancha { grid-column: 7 / -1; margin-top: clamp(4rem, 14vw, 13rem); }
-.historia__foto--ancha .foto { aspect-ratio: 4 / 3; }
-.historia__foto figcaption,
-.eventos__foto figcaption { margin-top: 0.8rem; font-size: var(--t-pequena); color: var(--tinta-suave); }
+.historia__foto { grid-column: 8 / -1; }
+.historia__foto .foto { aspect-ratio: 4 / 5; max-height: 78vh; }
+.historia__foto figcaption { margin-top: 0.8rem; font-size: var(--t-pequena); color: var(--tinta-suave); }
 
 
 /* ---------- 9. EL LOCAL ----------
@@ -650,39 +726,6 @@ figure { margin: 0; }
 
 
 /* ---------- 11. CARTA ---------- */
-.carta-resumen { border-top: 1px solid var(--linea); }
-
-/* Pestañas: texto con una línea fina debajo de la elegida */
-.pestanas {
-  position: relative;
-  display: flex;
-  gap: clamp(1.25rem, 2.6vw, 2.25rem);
-  overflow-x: auto;
-  scrollbar-width: none;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--linea);
-}
-.pestanas::-webkit-scrollbar { display: none; }
-.pestana {
-  position: relative;
-  flex-shrink: 0;
-  min-height: 46px;
-  padding: 0.6rem 0;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  margin-bottom: -1px;
-  background: none;
-  color: var(--tinta-suave);
-  font: 500 0.97rem var(--sans);
-  cursor: pointer;
-  transition: color 0.3s, border-color 0.3s;
-}
-.pestana:hover { color: var(--tinta); }
-.pestana[aria-selected="true"] { color: var(--tinta); border-bottom-color: var(--tinta); }
-
-.carta-resumen__panel { min-height: 320px; }
-.carta-resumen__todo { margin-top: 2.5rem; }
-
 /* Lista estilo carta: nombre, línea fina y precio */
 .lista-carta {
   display: grid;
@@ -733,8 +776,6 @@ a.fila-carta:hover .fila-carta__nombre { color: var(--verde); }
   border-block: 1px solid var(--linea);
   transition: top 0.5s var(--curva);
 }
-/* Si la cabecera se esconde al bajar, la barra de categorías sube con ella */
-body:has(.cabecera--oculta) .carta-nav { top: 0; }
 .carta-nav__fila { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; min-height: 62px; }
 .carta-nav__categorias { display: flex; gap: clamp(1rem, 2vw, 1.75rem); overflow-x: auto; scrollbar-width: none; }
 .carta-nav__categorias::-webkit-scrollbar { display: none; }
@@ -801,36 +842,19 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
 .lista-carta--bebidas .fila-carta__precio { max-width: 55%; white-space: normal; text-align: right; }
 
 
-/* ---------- 12. EVENTOS Y A DOMICILIO ---------- */
-.eventos { border-top: 1px solid var(--linea); }
-.eventos__rejilla {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: clamp(16px, 2.5vw, 32px);
-  align-items: center;
-}
-.eventos__foto { grid-column: 1 / span 6; }
-.eventos__foto .foto { aspect-ratio: 4 / 3; }
-.eventos__texto { grid-column: 8 / -1; }
-.eventos__texto .titulo { margin-bottom: 1.25rem; }
-.eventos__texto p { max-width: 46ch; color: var(--tinta-suave); }
-.eventos__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: 2rem; }
-
-.domicilio {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem 3rem;
-  margin-top: clamp(4rem, 9vw, 7rem);
-  padding-top: 1.75rem;
-  /* línea fina arriba, del ancho del contenido (no del relleno lateral) */
-  background: linear-gradient(var(--linea), var(--linea)) var(--margen-lateral) 0 / calc(100% - 2 * var(--margen-lateral)) 1px no-repeat;
-}
-.domicilio__titulo { font-size: var(--t-grande); }
-.domicilio__lista { display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; margin: 0; padding: 0; list-style: none; }
-.domicilio__lista a { font-weight: 600; text-underline-offset: 0.3em; }
-.domicilio__lista a:hover { color: var(--verde); }
+/* ---------- 12. HORARIO RESUMIDO (submenú y pie) ---------- */
+.horario-corto { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1.5rem; margin: 0; }
+.horario-corto dt { font-weight: 500; }
+.horario-corto dd { margin: 0; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.horario-corto .cerrado { color: var(--rojo); }
+.horario-corto--grande { gap: 0 2rem; font-size: 1.05rem; }
+.horario-corto--grande dt,
+.horario-corto--grande dd { padding: 0.85rem 0; border-bottom: 1px solid var(--linea); }
+.horario-corto--pie { grid-template-columns: 1fr; gap: 0; }
+.horario-corto--pie dt { margin-top: 0.4rem; color: var(--cal); font-weight: 400; }
+.horario-corto--pie dt:first-child { margin-top: 0; }
+.horario-corto--pie dd { color: var(--claro-suave); }
+.horario-corto--pie .cerrado { color: var(--claro-suave); }
 
 
 /* ---------- 13. RESERVA ----------
@@ -905,9 +929,6 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
 .visitanos__bloques p { margin-bottom: 0.6rem; }
 .visitanos__bloques p a { text-decoration-color: var(--linea); }
 
-.servicios { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
-.servicios li { padding: 0.3rem 0.8rem; border: 1px solid var(--linea); border-radius: var(--radio); font-size: var(--t-pequena); }
-
 .tabla-horario { width: 100%; border-collapse: collapse; font-size: 1rem; }
 .tabla-horario th,
 .tabla-horario td { padding: 0.7rem 0; border-bottom: 1px solid var(--linea); text-align: left; }
@@ -924,12 +945,12 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
 .visitanos__mapa {
   display: flex;
   align-self: start;
-  min-height: 520px;
+  min-height: 440px;
   overflow: hidden;
   border-radius: var(--radio);
   background: var(--linea);
 }
-.visitanos__mapa iframe { display: block; width: 100%; height: 100%; min-height: 520px; border: 0; }
+.visitanos__mapa iframe { display: block; width: 100%; height: 100%; min-height: 440px; border: 0; }
 .mapa-aviso {
   flex: 1;
   display: flex;
@@ -1335,31 +1356,63 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
 @media (max-width: 860px) {
   :root { --altura-cabecera: 64px; }
 
-  /* Menú desplegable */
+  /* Menú del móvil: pantalla completa; cada apartado se abre como un acordeón */
   .cabecera__boton-menu { display: block; z-index: 2; }
   .nav {
     position: fixed;
     inset: 0;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1.1rem;
-    padding: var(--altura-cabecera) var(--margen-lateral) 2rem;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: calc(var(--altura-cabecera) + 1.5rem) var(--margen-lateral) 2rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--cal);
     clip-path: circle(0 at calc(100% - 40px) 32px);
     visibility: hidden;
     transition: clip-path 0.6s var(--curva), visibility 0s 0.6s;
   }
   .menu-abierto .nav { clip-path: circle(150% at calc(100% - 40px) 32px); visibility: visible; transition: clip-path 0.7s var(--curva); }
-  .nav a:not(.boton) { font: 400 2.5rem/1.15 var(--serif); }
-  .nav__reservar { margin-top: 1rem; }
-  .nav > * { opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; }
-  .menu-abierto .nav > * { opacity: 1; transform: none; transition: opacity 0.5s, transform 0.5s var(--curva); }
-  .menu-abierto .nav > :nth-child(2) { transition-delay: 0.05s; }
-  .menu-abierto .nav > :nth-child(3) { transition-delay: 0.1s; }
-  .menu-abierto .nav > :nth-child(4) { transition-delay: 0.15s; }
-  .menu-abierto .nav > :nth-child(5) { transition-delay: 0.2s; }
+  .nav__lista { flex-direction: column; align-items: stretch; gap: 0; }
+  .nav__item { border-bottom: 1px solid var(--linea); }
+  .nav__boton { width: 100%; justify-content: space-between; min-height: 60px; font: 400 1.85rem/1.15 var(--serif); text-align: left; }
+  .nav__boton::after { display: none; }
+  .nav__flecha { width: 16px; height: 16px; }
+  .nav__reservar { align-self: flex-start; margin-top: 0.5rem; }
+  .nav > *,
+  .nav__item { opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; }
+  .menu-abierto .nav > *,
+  .menu-abierto .nav__item { opacity: 1; transform: none; transition: opacity 0.5s, transform 0.5s var(--curva); }
+  .menu-abierto .nav__item:nth-child(2) { transition-delay: 0.05s; }
+  .menu-abierto .nav__item:nth-child(3) { transition-delay: 0.1s; }
+  .menu-abierto .nav__item:nth-child(4) { transition-delay: 0.15s; }
+  .menu-abierto .nav__reservar { transition-delay: 0.2s; }
   .logo { z-index: 2; }
+
+  /* Submenús dentro del menú: se abren hacia abajo (la fila de la rejilla pasa de 0 a su altura) */
+  .submenu {
+    position: static;
+    display: grid;
+    grid-template-rows: 0fr;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+    transition: grid-template-rows 0.5s var(--curva), visibility 0s 0.5s;
+  }
+  .submenu.abierto { grid-template-rows: 1fr; transition: grid-template-rows 0.5s var(--curva), visibility 0s; }
+  .submenu > .contenedor { min-height: 0; overflow: hidden; padding: 0 0 1.5rem; }
+  .submenu__fila { display: block; }
+  .submenu__titulo { display: none; }
+  .submenu__lado { margin-top: 1.5rem; }
+  .submenu__categorias { columns: 1; }
+  .submenu__categorias a { font-size: 1.15rem; }
+  .submenu__sitios { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .submenu__sitio-nombre { font-size: 1.05rem; }
+  .submenu__sitio-texto { display: none; }
+  .cabecera.con-submenu::before { display: none; }
 
   /* Portada */
   .portada { min-height: 0; }
@@ -1373,18 +1426,15 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
   .cabeza-seccion,
   .historia__rejilla,
   .destacados__cabeza,
-  .eventos__rejilla,
   .cabeza-pagina__fila { grid-template-columns: 1fr; row-gap: 1rem; }
   .cabeza-seccion > *,
   .historia__rejilla > *,
   .destacados__cabeza > *,
-  .eventos__rejilla > *,
   .cabeza-pagina__fila > * { grid-column: 1 / -1 !important; }
   .historia__rejilla { row-gap: 2.5rem; }
-  .historia__foto--ancha { margin-top: 0; }
-  .historia__foto--alta { max-width: 520px; }
+  .historia__foto { max-width: 520px; }
+  .historia__foto .foto { aspect-ratio: 4 / 3; max-height: none; }
   .carrusel__controles { justify-self: start; margin-top: 0.75rem; }
-  .eventos__texto { margin-top: 1.5rem; }
   .visitanos__rejilla,
   .ficha__rejilla { grid-template-columns: 1fr; }
   .ficha__foto { position: static; }
@@ -1392,15 +1442,22 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
 
   /* El local: un panel debajo de otro, todos abiertos */
   .local__paneles { flex-direction: column; height: auto; }
-  .panel { flex: none; aspect-ratio: 4 / 3.3; cursor: default; }
+  .panel { flex: none; aspect-ratio: 16 / 11; cursor: default; }
   .panel__foto img { transform: none; filter: none; }
   .panel__mas { grid-template-rows: 1fr; }
   .panel__desc { width: auto; padding-top: 0.6rem; opacity: 1; }
 
   .lista-carta { grid-template-columns: minmax(0, 1fr); }
-  .pie__rejilla { grid-template-columns: 1fr 1fr; }
-  .visitanos__mapa { min-height: 380px; }
-  .visitanos__mapa iframe { min-height: 380px; }
+  /* Pie en el móvil: dirección y horario en dos columnas; contacto y enlaces debajo */
+  .pie__rejilla { grid-template-columns: 1fr 1fr; grid-template-areas: "donde horario" "reservas reservas" "tambien tambien"; gap: 1.75rem 1.25rem; }
+  .pie__bloque--donde { grid-area: donde; }
+  .pie__bloque--horario { grid-area: horario; }
+  .pie__bloque--reservas { grid-area: reservas; }
+  .pie__bloque--tambien { grid-area: tambien; }
+  .pie__bloque--tambien .pie__lista { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+  .visitanos__mapa { min-height: 0; }
+  .visitanos__mapa iframe { min-height: 340px; }
+  .mapa-aviso { padding: 1.5rem; }
   .error-404__fila { grid-template-columns: 1fr; }
   .error-404__circulo { width: 180px; }
 
@@ -1451,7 +1508,6 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
   .aviso-cookies__botones { grid-template-columns: 1fr; }
   .tabla-horario th { width: 36%; }
   .pie__cabeza { flex-direction: column; align-items: flex-start; }
-  .pie__rejilla { grid-template-columns: 1fr; gap: 1.75rem; }
 }
 
 /* Portátiles con poca altura: portada más compacta */
@@ -1461,18 +1517,8 @@ body:has(.cabecera--oculta) .carta-nav { top: 0; }
 }
 
 
-/* ---------- 24. GSAP Y LENIS ----------
+/* ---------- 24. GSAP ----------
    La clase con-gsap la pone js/animaciones.js cuando GSAP ha cargado. */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-smooth iframe { pointer-events: none; }
-
-/* Pestañas de la carta: una línea fina se desliza a la pestaña elegida */
-.pestanas__indicador { position: absolute; left: 0; bottom: 0; height: 1px; background: var(--tinta); pointer-events: none; }
-.con-indicador .pestana[aria-selected="true"] { border-bottom-color: transparent; }
-
 /* Carrusel de destacados mientras se desliza o se arrastra con el ratón */
 .carrusel.sin-encaje { scroll-snap-type: none; }
 .carrusel.arrastrando { user-select: none; }

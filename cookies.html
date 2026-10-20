@@ -42,18 +42,19 @@
   <script src="js/datos.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/cookies.js" defer></script>
-  <!-- Animaciones: GSAP (con ScrollTrigger y SplitText) y scroll suave con Lenis -->
+  <!-- Animaciones: GSAP con ScrollTrigger y SplitText (el scroll es el normal del navegador) -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
   <script src="js/animaciones.js" defer></script>
 </head>
 <body class="pagina-legal">
 
   <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-  <!-- ===================== CABECERA ===================== -->
+  <!-- ===================== CABECERA =====================
+       Cada apartado del menú despliega un submenú con su información, sin salir de la página.
+       En el móvil, los submenús se abren como un acordeón dentro del menú. -->
   <header class="cabecera">
     <div class="contenedor cabecera__fila">
       <a class="logo" href="index.html" aria-label="La Chulería, ir al inicio">
@@ -62,10 +63,101 @@
       </a>
 
       <nav class="nav" aria-label="Principal">
-        <a href="carta.html">Carta</a>
-        <a href="index.html#local">El local</a>
-        <a href="index.html#eventos">Eventos</a>
-        <a href="index.html#visitanos">Horario y ubicación</a>
+        <ul class="nav__lista">
+          <li class="nav__item">
+            <button class="nav__boton" type="button" aria-expanded="false" aria-controls="sub-carta">Carta <svg class="nav__flecha" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+            <div class="submenu" id="sub-carta">
+              <div class="contenedor submenu__fila">
+                <div class="submenu__principal">
+                  <p class="submenu__titulo">La carta</p>
+                  <!-- Las secciones de la carta las pone main.js a partir de datos.js -->
+                  <ul class="submenu__categorias" data-categorias></ul>
+                </div>
+                <div class="submenu__lado">
+                  <p>Tapas para compartir, arroces de la casa, carnes, pescados y postres caseros. Si tienes alguna alergia, díselo a nuestro equipo.</p>
+                  <a class="boton boton--contorno" href="carta.html">Ver la carta completa</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav__item">
+            <button class="nav__boton" type="button" aria-expanded="false" aria-controls="sub-local">El local <svg class="nav__flecha" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+            <div class="submenu" id="sub-local">
+              <div class="contenedor submenu__fila">
+                <div class="submenu__principal">
+                  <p class="submenu__titulo">Tres ambientes y terraza</p>
+                  <ul class="submenu__sitios">
+              <li>
+                <a class="submenu__sitio" href="index.html#local">
+                  <span class="foto"><img data-src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg" data-srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5618-1536x1022.jpg 1536w" sizes="(max-width: 860px) 30vw, 300px" width="1024" height="681" alt="La sala con banquetas rojas y ventanales" decoding="async"></span>
+                  <span class="submenu__sitio-nombre">La sala</span>
+                  <span class="submenu__sitio-texto">Banquetas rojas, ladrillo visto y grandes ventanales.</span>
+                </a>
+              </li>
+              <li>
+                <a class="submenu__sitio" href="index.html#local">
+                  <span class="foto"><img data-src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-1024x681.jpg" data-srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5640-1536x1022.jpg 1536w" sizes="(max-width: 860px) 30vw, 300px" width="1024" height="681" alt="Comedor con papel pintado, espejo y sillas de terciopelo" decoding="async"></span>
+                  <span class="submenu__sitio-nombre">El comedor</span>
+                  <span class="submenu__sitio-texto">Papel pintado, un gran espejo y sillas de terciopelo.</span>
+                </a>
+              </li>
+              <li>
+                <a class="submenu__sitio" href="index.html#local">
+                  <span class="foto"><img data-src="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg" data-srcset="https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-768x511.jpg 768w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1024x681.jpg 1024w, https://lachuleria.es/wp-content/uploads/2024/03/DSC5657-1536x1022.jpg 1536w" sizes="(max-width: 860px) 30vw, 300px" width="1024" height="681" alt="Copas colgadas sobre la barra" decoding="async"></span>
+                  <span class="submenu__sitio-nombre">La barra</span>
+                  <span class="submenu__sitio-texto">Copas colgadas, cerveza de grifo y buenos vinos.</span>
+                </a>
+              </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav__item">
+            <button class="nav__boton" type="button" aria-expanded="false" aria-controls="sub-eventos">Eventos <svg class="nav__flecha" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+            <div class="submenu" id="sub-eventos">
+              <div class="contenedor submenu__fila">
+                <div class="submenu__principal">
+                  <p class="submenu__titulo">Cumpleaños, comuniones y reuniones</p>
+                  <p class="submenu__texto">Preparamos menús especiales para celebraciones. Cuéntanos qué celebras y cuántos sois, y te proponemos un menú.</p>
+                  <p class="submenu__acciones">
+                    <a class="boton boton--contorno" href="reservas.html?motivo=evento">Pedir información</a>
+                    <a class="enlace" data-enlace="telefono">Llamar al <span data-dato="telefono"></span></a>
+                  </p>
+                </div>
+                <div class="submenu__lado">
+                  <p class="submenu__subtitulo">También en casa</p>
+                  <ul class="submenu__enlaces">
+                    <li><a data-enlace="glovo" target="_blank" rel="noopener">Pedir en Glovo</a></li>
+                    <li><a data-enlace="justEat" target="_blank" rel="noopener">Pedir en Just Eat</a></li>
+                    <li><a data-enlace="telefono">Para llevar: <span data-dato="telefono"></span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav__item">
+            <button class="nav__boton" type="button" aria-expanded="false" aria-controls="sub-horario">Horario y ubicación <svg class="nav__flecha" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+            <div class="submenu" id="sub-horario">
+              <div class="contenedor submenu__fila">
+                <div class="submenu__principal">
+                  <p class="submenu__titulo">Horario</p>
+                  <p class="estado"><span class="estado__punto" aria-hidden="true"></span><span class="estado__texto"></span></p>
+                  <dl class="horario-corto" data-horario-corto></dl>
+                  <p class="submenu__nota" data-dato="notaCocina"></p>
+                </div>
+                <div class="submenu__lado">
+                  <p class="submenu__subtitulo">Dónde estamos</p>
+                  <p><span data-dato="direccion"></span><br><span data-dato="ciudad"></span></p>
+                  <p class="submenu__acciones">
+                    <a class="enlace" data-enlace="mapa" target="_blank" rel="noopener">Cómo llegar</a>
+                    <a class="enlace" data-enlace="telefono"><span data-dato="telefono"></span></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
         <a class="boton boton--rojo nav__reservar" href="reservas.html">Reservar mesa</a>
       </nav>
 
@@ -127,26 +219,21 @@
       </div>
 
       <div class="pie__rejilla">
-        <div>
+        <div class="pie__bloque pie__bloque--donde">
           <h2 class="pie__titulo">Dónde estamos</h2>
           <p><span data-dato="direccion"></span><br><span data-dato="ciudad"></span></p>
           <a data-enlace="mapa" target="_blank" rel="noopener">Cómo llegar</a>
         </div>
-        <div>
+        <div class="pie__bloque pie__bloque--reservas">
           <h2 class="pie__titulo">Reservas</h2>
           <p><a data-enlace="telefono"><span data-dato="telefono"></span></a><br>
              <a data-enlace="email"><span data-dato="email"></span></a></p>
         </div>
-        <nav aria-label="La casa">
-          <h2 class="pie__titulo">La casa</h2>
-          <ul class="pie__lista">
-            <li><a href="carta.html">Carta</a></li>
-            <li><a href="reservas.html">Reservar mesa</a></li>
-            <li><a href="index.html#eventos">Eventos</a></li>
-            <li><a href="index.html#visitanos">Horario</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="También en">
+        <div class="pie__bloque pie__bloque--horario">
+          <h2 class="pie__titulo">Horario</h2>
+          <dl class="horario-corto horario-corto--pie" data-horario-corto></dl>
+        </div>
+        <nav class="pie__bloque pie__bloque--tambien" aria-label="También en">
           <h2 class="pie__titulo">También en</h2>
           <ul class="pie__lista">
             <li><a data-enlace="glovo" target="_blank" rel="noopener">Glovo</a></li>

@@ -55,53 +55,7 @@ function iniciarLocal() {
 }
 
 
-// Pestañas con un adelanto de cada categoría de la carta
-function pintarPestanas() {
-  const pestanas = document.getElementById("pestanas-carta");
-  const panel = document.getElementById("panel-carta");
-  const categorias = CATEGORIAS;
-  const inicial = "picar"; // la pestaña abierta al llegar
-
-  pestanas.innerHTML = categorias.map((c) => `
-    <button class="pestana" role="tab" id="pestana-${c.id}" data-categoria="${c.id}"
-            aria-selected="${c.id === inicial}" tabindex="${c.id === inicial ? 0 : -1}">${c.nombre}</button>
-  `).join("");
-
-  function mostrar(categoria) {
-    const platos = PLATOS.filter((p) => p.categoria === categoria).slice(0, 6);
-    panel.setAttribute("aria-labelledby", `pestana-${categoria}`);
-    panel.classList.remove("entrando");
-    void panel.offsetWidth; // reinicia la animación
-    panel.innerHTML = `<ul class="lista-carta">${platos.map(filaCarta).join("")}</ul>`;
-    panel.classList.add("entrando");
-  }
-
-  pestanas.addEventListener("click", (e) => {
-    const boton = e.target.closest(".pestana");
-    if (!boton) return;
-    pestanas.querySelectorAll(".pestana").forEach((b) => {
-      const activa = b === boton;
-      b.setAttribute("aria-selected", activa);
-      b.tabIndex = activa ? 0 : -1;
-    });
-    mostrar(boton.dataset.categoria);
-  });
-
-  // Flechas del teclado para moverse entre pestañas
-  pestanas.addEventListener("keydown", (e) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    const botones = [...pestanas.querySelectorAll(".pestana")];
-    const actual = botones.indexOf(document.activeElement);
-    const siguiente = botones[(actual + (e.key === "ArrowRight" ? 1 : -1) + botones.length) % botones.length];
-    siguiente.focus();
-    siguiente.click();
-  });
-
-  mostrar(inicial);
-}
-
-
-/* Reserva rápida de la portada: días abiertos, horas de ese día y personas */
+/* Reserva rápida (sección "Reserva tu mesa"): días abiertos, horas de ese día y personas */
 function prepararReservaRapida() {
   const selFecha = document.getElementById("rr-fecha");
   if (!selFecha) return;
@@ -146,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
   prepararReservaRapida();
   pintarDestacados();
   iniciarLocal();
-  pintarPestanas();
   pintarVisitanos();
   iniciarRevelado(); // para los elementos que acabamos de crear
 });
