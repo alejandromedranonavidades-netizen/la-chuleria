@@ -1403,7 +1403,9 @@ a.fila-carta:hover .fila-carta__nombre { color: var(--verde); }
     transition: grid-template-rows 0.5s var(--curva), visibility 0s 0.5s;
   }
   .submenu.abierto { grid-template-rows: 1fr; transition: grid-template-rows 0.5s var(--curva), visibility 0s; }
-  .submenu > .contenedor { min-height: 0; overflow: hidden; padding: 0 0 1.5rem; }
+  /* el espacio de abajo solo cuando está abierto (cerrado no debe ocupar nada) */
+  .submenu > .contenedor { min-height: 0; overflow: hidden; padding: 0; transition: padding 0.5s var(--curva); }
+  .submenu.abierto > .contenedor { padding-bottom: 1.5rem; }
   .submenu__fila { display: block; }
   .submenu__titulo { display: none; }
   .submenu__lado { margin-top: 1.5rem; }
