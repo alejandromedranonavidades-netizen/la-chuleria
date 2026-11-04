@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Reglas de trabajo
+
+- Responde siempre en español.
+- Antes de usar una librería, consulta su documentación actual con Context7.
+- Cuando termines un cambio en la web, pruébala con Playwright, revisa los errores de la consola y arréglalos hasta que funcione.
+- No des una tarea por terminada sin haberla probado.
+
 ## What this is
 
 A static website proposal for La Chulería, a bar & restaurant in Valdemoro. It is **not the official site** yet: every page has `noindex, nofollow` and `robots.txt` disallows everything until the restaurant approves it. `LEEME.md` is the README (in Spanish) and holds the pending-data table, the go-live checklist and the design rationale; keep it in sync when behaviour or file locations change.
